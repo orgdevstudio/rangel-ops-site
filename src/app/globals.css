@@ -1,0 +1,70 @@
+@import "tailwindcss";
+
+:root {
+  --background: #050b14;
+  --background-secondary: #0a1624;
+  --accent: #0ea5e9;
+  --accent-light: #22d3ee;
+  --foreground: #ffffff;
+  --foreground-muted: #94a3b8;
+  /* Microinterações */
+  --ease-out: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --duration-fast: 200ms;
+  --duration-normal: 280ms;
+  /* Escala tipográfica: H1 hero dominante, H2 forte com respiro, H3 cards, body leitura confortável */
+  --leading-tight: 1.2;
+  --leading-heading: 1.25;
+  --leading-body: 1.65;
+  --tracking-heading: -0.02em;
+  --prose-max: 65ch;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-background-secondary: var(--background-secondary);
+  --color-accent: var(--accent);
+  --color-accent-light: var(--accent-light);
+  --color-foreground: var(--foreground);
+  --color-foreground-muted: var(--foreground-muted);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), system-ui, sans-serif;
+}
+
+/* Transição de página: entrada fluida ao navegar */
+@keyframes page-enter {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-page-enter {
+  animation: page-enter 0.35s var(--ease-out) forwards;
+}
+
+/* Largura máxima para blocos de texto: leitura confortável */
+.prose-width {
+  max-width: var(--prose-max);
+}
+
+/* Grid estrutural: use grid grid-cols-1 lg:grid-cols-12 em seções; col-span-* para alinhamento */

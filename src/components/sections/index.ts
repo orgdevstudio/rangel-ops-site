@@ -1,0 +1,14 @@
+export { Hero } from "./Hero";
+export { ProblemForWhom } from "./ProblemForWhom";
+export { TrustProof } from "./TrustProof";
+export { AboutPreview } from "./AboutPreview";
+export { EcosystemBrief } from "./EcosystemBrief";
+export { AppsPreview } from "./AppsPreview";
+export { AppsGrid } from "./AppsGrid";
+export type { AppsGridProps } from "./AppsGrid";
+export { DiferenciaisCompact } from "./DiferenciaisCompact";
+export { Features } from "./Features";
+export type { FeaturesProps } from "./Features";
+export { HomeCTA } from "./HomeCTA";
+export { CTA } from "./CTA";
+export type { CTAProps } from "./CTA";
