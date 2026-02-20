@@ -61,16 +61,27 @@ export default async function AppPage({ params }: AppPageProps) {
           </div>
           <div className="mt-16 flex flex-col items-center gap-12">
             {slug === "sellerflow" && (
-              <div className="flex flex-col items-center gap-2">
+              <div className="flex flex-col items-center gap-4">
                 <p className="text-xs font-semibold uppercase tracking-[0.15em] text-[#94a3b8]/70">
                   Acesse
                 </p>
-                <Link
-                  href="/aplicativos/sellerflow/politica-de-privacidade"
-                  className="text-sm font-medium text-[#94a3b8] transition-colors duration-200 ease-out hover:text-[#0EA5E9]"
-                >
-                  Política de Privacidade
-                </Link>
+                <div className="flex flex-col items-center gap-3 sm:flex-row sm:gap-6">
+                  <Link
+                    href="/aplicativos/sellerflow/politica-de-privacidade"
+                    className="text-sm font-medium text-[#94a3b8] transition-colors duration-200 ease-out hover:text-[#0EA5E9]"
+                  >
+                    Política de Privacidade
+                  </Link>
+                  <Link
+                    href="/aplicativos/sellerflow/exclusao-de-conta"
+                    className="inline-flex items-center gap-2 rounded-lg border border-white/20 bg-white/5 px-4 py-2.5 text-sm font-medium text-white transition-all duration-200 ease-out hover:border-[#0EA5E9]/40 hover:bg-[#0EA5E9]/10 hover:text-[#0EA5E9]"
+                  >
+                    Exclusão de conta e dados
+                    <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
+                  </Link>
+                </div>
               </div>
             )}
             <div>
