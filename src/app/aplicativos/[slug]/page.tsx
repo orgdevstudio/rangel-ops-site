@@ -59,7 +59,20 @@ export default async function AppPage({ params }: AppPageProps) {
               </p>
             ))}
           </div>
-          <div className="mt-16 flex flex-col items-center gap-8">
+          <div className="mt-16 flex flex-col items-center gap-12">
+            {slug === "sellerflow" && (
+              <div className="flex flex-col items-center gap-2">
+                <p className="text-xs font-semibold uppercase tracking-[0.15em] text-[#94a3b8]/70">
+                  Acesse
+                </p>
+                <Link
+                  href="/aplicativos/sellerflow/politica-de-privacidade"
+                  className="text-sm font-medium text-[#94a3b8] transition-colors duration-200 ease-out hover:text-[#0EA5E9]"
+                >
+                  Política de Privacidade
+                </Link>
+              </div>
+            )}
             <div>
               <p className="mb-4 text-center text-sm font-medium text-[#94a3b8]/80">
                 Baixe o app
