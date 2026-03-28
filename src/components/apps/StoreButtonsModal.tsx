@@ -14,7 +14,12 @@ const AppleIcon = () => (
   </svg>
 );
 
-export function StoreButtonsModal() {
+type StoreButtonsModalProps = {
+  /** Nome do app exibido no modal (ex.: SellerFlow, DriveFlow). */
+  appName: string;
+};
+
+export function StoreButtonsModal({ appName }: StoreButtonsModalProps) {
   const [isOpen, setIsOpen] = useState(false);
 
   const openModal = () => setIsOpen(true);
@@ -64,7 +69,8 @@ export function StoreButtonsModal() {
               Disponível em breve
             </h2>
             <p className="mt-4 text-center text-[#94a3b8]/90">
-              O SellerFlow estará disponível em breve na Google Play e na App Store. Enquanto isso, entre em contato para saber mais.
+              O {appName} estará disponível em breve na Google Play e na App Store.
+              Enquanto isso, entre em contato para saber mais.
             </p>
             <button
               type="button"

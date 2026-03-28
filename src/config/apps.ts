@@ -16,4 +16,15 @@ export const apps: App[] = [
     status: "em-breve",
     href: "/aplicativos/sellerflow",
   },
+  {
+    id: "2",
+    name: "DriveFlow",
+    slug: "driveflow",
+    description:
+      "DriveFlow é o aplicativo da Rangel Ops voltado a motoristas que atuam em plataformas de transporte por aplicativo. O foco é apoiar decisões financeiras com cálculos e leitura de lucro no contexto de cada corrida.\n\nO app reúne indicadores e simulações para que o motorista compreenda, de forma objetiva, o retorno esperado antes e durante o trabalho nas ruas.\n\nQuando a corrida é tocada ou aceita, o DriveFlow verifica se a oferta é favorável ou desfavorável conforme regras e parâmetros definidos pelo próprio motorista. A análise gera uma conclusão rápida e clara, exibida na tela para orientar a decisão com segurança e transparência.",
+    shortDescription:
+      "Cálculos e lucro para motoristas de aplicativo: análise rápida de cada corrida antes de você seguir.",
+    status: "em-breve",
+    href: "/aplicativos/driveflow",
+  },
 ];

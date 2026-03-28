@@ -33,6 +33,7 @@ export default async function AppPage({ params }: AppPageProps) {
   }
 
   const paragraphs = app.description.split("\n\n").filter(Boolean);
+  const showAcesseLinks = slug === "sellerflow" || slug === "driveflow";
 
   return (
     <Section variant="default" background="default">
@@ -59,21 +60,22 @@ export default async function AppPage({ params }: AppPageProps) {
               </p>
             ))}
           </div>
+
           <div className="mt-16 flex flex-col items-center gap-12">
-            {slug === "sellerflow" && (
+            {showAcesseLinks && (
               <div className="flex flex-col items-center gap-4">
                 <p className="text-xs font-semibold uppercase tracking-[0.15em] text-[#94a3b8]/70">
                   Acesse
                 </p>
                 <div className="flex flex-col items-center gap-3 sm:flex-row sm:gap-6">
                   <Link
-                    href="/aplicativos/sellerflow/politica-de-privacidade"
+                    href={`/aplicativos/${slug}/politica-de-privacidade`}
                     className="text-sm font-medium text-[#94a3b8] transition-colors duration-200 ease-out hover:text-[#0EA5E9]"
                   >
                     Política de Privacidade
                   </Link>
                   <Link
-                    href="/aplicativos/sellerflow/exclusao-de-conta"
+                    href={`/aplicativos/${slug}/exclusao-de-conta`}
                     className="inline-flex items-center gap-2 rounded-lg border border-white/20 bg-white/5 px-4 py-2.5 text-sm font-medium text-white transition-all duration-200 ease-out hover:border-[#0EA5E9]/40 hover:bg-[#0EA5E9]/10 hover:text-[#0EA5E9]"
                   >
                     Exclusão de conta e dados
@@ -88,7 +90,7 @@ export default async function AppPage({ params }: AppPageProps) {
               <p className="mb-4 text-center text-sm font-medium text-[#94a3b8]/80">
                 Baixe o app
               </p>
-              <StoreButtonsModal />
+              <StoreButtonsModal appName={app.name} />
             </div>
             <Link href="/contato" className="inline-block">
               <Button variant="outline" className="border-[#0EA5E9] text-[#0EA5E9] hover:bg-[#0EA5E9]/10">

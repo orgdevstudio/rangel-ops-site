@@ -8,7 +8,11 @@ type FormErrors = {
   email?: string;
 };
 
-export function ExclusaoContaContent() {
+export type ExclusaoAppSlug = "sellerflow" | "driveflow";
+
+export function ExclusaoContaContent({ slug }: { slug: ExclusaoAppSlug }) {
+  const appPath = `/aplicativos/${slug}`;
+  const appName = slug === "driveflow" ? "DriveFlow" : "SellerFlow";
   const [status, setStatus] = useState<"idle" | "submitting" | "success">("idle");
   const [errors, setErrors] = useState<FormErrors>({});
 
@@ -56,9 +60,9 @@ export function ExclusaoContaContent() {
           Nossa equipe processará sua solicitação em até 5 dias úteis. Você
           receberá uma confirmação por e-mail.
         </p>
-        <Link href="/aplicativos/sellerflow" className="mt-6 inline-block">
+        <Link href={appPath} className="mt-6 inline-block">
           <Button variant="outline" size="sm">
-            Voltar ao SellerFlow
+            Voltar ao {appName}
           </Button>
         </Link>
       </div>
@@ -140,10 +144,10 @@ export function ExclusaoContaContent() {
       <Container size="xl">
         <article className="mx-auto max-w-3xl pb-24 pt-16">
           <Link
-            href="/aplicativos/sellerflow"
+            href={appPath}
             className="inline-flex items-center text-sm font-medium text-[#94a3b8] transition-colors duration-200 ease-out hover:text-white"
           >
-            ← Voltar ao SellerFlow
+            ← Voltar ao {appName}
           </Link>
 
           <header className="mt-12">
@@ -151,9 +155,25 @@ export function ExclusaoContaContent() {
               Exclusão de conta e dados
             </h1>
             <p className="mt-4 text-base text-[#94a3b8]/90 leading-[1.65]">
-              O SellerFlow está em conformidade com a Lei Geral de Proteção de
-              Dados (LGPD) e com as exigências da Google Play. Você tem o direito
-              de solicitar a exclusão da sua conta e dos dados associados a ela.
+              {slug === "driveflow" ? (
+                <>
+                  O DriveFlow segue a Lei Geral de Proteção de Dados (LGPD) e as
+                  exigências da Google Play. Você pode solicitar a exclusão da
+                  sua conta e dos dados tratados em nossos sistemas. A conta usa
+                  serviços em nuvem (como o Firebase) para autenticação e
+                  informações vinculadas ao seu perfil; já parâmetros de
+                  cálculo, histórico guardado só no celular e preferências locais
+                  podem exigir um passo à parte no aparelho, como explicamos
+                  nas seções abaixo.
+                </>
+              ) : (
+                <>
+                  O {appName} está em conformidade com a Lei Geral de Proteção
+                  de Dados (LGPD) e com as exigências da Google Play. Você tem o
+                  direito de solicitar a exclusão da sua conta e dos dados
+                  associados a ela.
+                </>
+              )}
             </p>
           </header>
 
@@ -183,17 +203,42 @@ export function ExclusaoContaContent() {
                     Exclusão pelo aplicativo
                   </h2>
                   <p className="mt-4 text-base text-[#94a3b8]/90 leading-[1.75]">
-                    Se você possui acesso ao SellerFlow instalado no seu
-                    dispositivo, pode excluir sua conta diretamente pelo
-                    aplicativo. O processo é imediato e garante a remoção dos
-                    dados vinculados à sua conta.
+                    {slug === "driveflow" ? (
+                      <>
+                        Com o DriveFlow instalado e acesso à sua conta, você
+                        pode pedir a exclusão direto no app. Esse fluxo encerra o
+                        vínculo da sua conta com os serviços em nuvem utilizados
+                        pelo aplicativo (incluindo autenticação e dados de
+                        perfil mantidos em Firebase ou serviços equivalentes),
+                        conforme previsto na versão em uso.
+                      </>
+                    ) : (
+                      <>
+                        Se você possui acesso ao SellerFlow instalado no seu
+                        dispositivo, pode excluir sua conta diretamente pelo
+                        aplicativo. O processo é imediato e garante a remoção dos
+                        dados vinculados à sua conta.
+                      </>
+                    )}
                   </p>
+                  {slug === "driveflow" && (
+                    <p className="mt-4 text-base text-[#94a3b8]/90 leading-[1.75]">
+                      Depois de confirmar, aguarde a mensagem de conclusão, se
+                      houver. Em seguida, se quiser apagar também o que ficou
+                      só no aparelho (veja abaixo), use a limpeza de dados do aplicativo
+                      nas configurações do Android ou desinstale o DriveFlow.
+                    </p>
+                  )}
                   <h3 className="mt-6 text-base font-semibold text-white">
                     Passos para exclusão no app
                   </h3>
                   <ol className="mt-3 list-decimal space-y-2 pl-6 text-base text-[#94a3b8]/90 leading-[1.75]">
-                    <li>Abra o aplicativo SellerFlow</li>
-                    <li>Acesse o menu de configurações ou perfil</li>
+                    <li>Abra o aplicativo {appName}</li>
+                    <li>
+                      {slug === "driveflow"
+                        ? "Abra as configurações ou a área da sua conta / perfil"
+                        : "Acesse o menu de configurações ou perfil"}
+                    </li>
                     <li>Selecione a opção &quot;Excluir conta&quot;</li>
                     <li>Confirme a exclusão quando solicitado</li>
                   </ol>
@@ -225,22 +270,82 @@ export function ExclusaoContaContent() {
                   <h2 className="text-xl font-bold tracking-tight text-white sm:text-2xl">
                     Dados excluídos
                   </h2>
-                  <p className="mt-4 text-base text-[#94a3b8]/90 leading-[1.75]">
-                    Ao solicitar a exclusão da conta, os seguintes dados são
-                    removidos de nossos sistemas:
-                  </p>
-                  <ul className="mt-4 list-disc space-y-2 pl-6 text-base text-[#94a3b8]/90 leading-[1.75]">
-                    <li>Dados de cadastro e autenticação (e-mail, nome, foto de perfil)</li>
-                    <li>Informações do perfil do usuário</li>
-                    <li>Dados da loja (nome, logotipo)</li>
-                    <li>Metadados de importação de planilhas</li>
-                    <li>Histórico de uso vinculado à conta</li>
-                  </ul>
-                  <p className="mt-4 text-base text-[#94a3b8]/90 leading-[1.75]">
-                    Os dados armazenados localmente no dispositivo permanecem até
-                    que o usuário desinstale o aplicativo ou realize a limpeza
-                    dos dados do app nas configurações do sistema.
-                  </p>
+                  {slug === "driveflow" ? (
+                    <>
+                      <p className="mt-4 text-base text-[#94a3b8]/90 leading-[1.75]">
+                        A exclusão da conta afeta de forma distinta o que está na
+                        nuvem e o que está só no seu celular. Em ambos os casos,
+                        tratamos o pedido com base na LGPD e no direito
+                        à eliminação dos dados quando aplicável.
+                      </p>
+                      <h3 className="mt-6 text-base font-semibold text-white">
+                        Na nuvem (Firebase e serviços associados)
+                      </h3>
+                      <p className="mt-3 text-base text-[#94a3b8]/90 leading-[1.75]">
+                        Ao excluir a conta pelo app ou pelo suporte, buscamos
+                        remover ou anonimizar, nos sistemas que controlamos:
+                      </p>
+                      <ul className="mt-4 list-disc space-y-2 pl-6 text-base text-[#94a3b8]/90 leading-[1.75]">
+                        <li>
+                          Dados de login e identificação da conta (por exemplo
+                          e-mail vinculado ao Firebase Authentication)
+                        </li>
+                        <li>Nome, foto e demais dados de perfil guardados na nuvem</li>
+                        <li>
+                          Preferências e parâmetros de análise de corrida que
+                          tenham sido sincronizados com a sua conta
+                        </li>
+                        <li>
+                          Histórico e registros associados à conta nos bancos de
+                          dados utilizados pelo DriveFlow, quando existirem
+                        </li>
+                      </ul>
+                      <p className="mt-4 text-sm text-[#94a3b8]/75 leading-[1.65]">
+                        Pode haver prazo curto de retenção em backups ou registros
+                        técnicos exigidos por lei; nesses casos, os dados deixam
+                        de ser usados para finalidade ativa e são eliminados
+                        quando o backup expira.
+                      </p>
+                      <h3 className="mt-6 text-base font-semibold text-white">
+                        No aparelho (dados locais)
+                      </h3>
+                      <p className="mt-3 text-base text-[#94a3b8]/90 leading-[1.75]">
+                        Cálculos, caches, histórico recente e ajustes que ficaram
+                        apenas na memória do dispositivo não são apagados
+                        automaticamente pela exclusão da conta na nuvem. Para
+                        remover tudo localmente, use{" "}
+                        <strong className="font-medium text-white/90">
+                          Configurações do Android → Apps → DriveFlow → Limpar
+                          dados
+                        </strong>{" "}
+                        ou desinstale o aplicativo. Se você trocar de celular sem
+                        limpar o app antigo, considere apagar os dados ou
+                        desinstalar lá também.
+                      </p>
+                    </>
+                  ) : (
+                    <>
+                      <p className="mt-4 text-base text-[#94a3b8]/90 leading-[1.75]">
+                        Ao solicitar a exclusão da conta, os seguintes dados são
+                        removidos de nossos sistemas:
+                      </p>
+                      <ul className="mt-4 list-disc space-y-2 pl-6 text-base text-[#94a3b8]/90 leading-[1.75]">
+                        <li>
+                          Dados de cadastro e autenticação (e-mail, nome, foto de
+                          perfil)
+                        </li>
+                        <li>Informações do perfil do usuário</li>
+                        <li>Dados da loja (nome, logotipo)</li>
+                        <li>Metadados de importação de planilhas</li>
+                        <li>Histórico de uso vinculado à conta</li>
+                      </ul>
+                      <p className="mt-4 text-base text-[#94a3b8]/90 leading-[1.75]">
+                        Os dados armazenados localmente no dispositivo permanecem até
+                        que o usuário desinstale o aplicativo ou realize a limpeza
+                        dos dados do app nas configurações do sistema.
+                      </p>
+                    </>
+                  )}
                 </div>
               </div>
             </div>
@@ -270,10 +375,23 @@ export function ExclusaoContaContent() {
                     Sem acesso ao aplicativo
                   </h2>
                   <p className="mt-4 text-base text-[#94a3b8]/90 leading-[1.75]">
-                    Caso você não tenha acesso ao aplicativo (por exemplo, após
-                    troca de dispositivo ou desinstalação), pode solicitar a
-                    exclusão da conta e dos dados por meio do formulário abaixo
-                    ou diretamente pelo e-mail de suporte.
+                    {slug === "driveflow" ? (
+                      <>
+                        Se você não consegue abrir o DriveFlow (por exemplo,
+                        após trocar de aparelho, reinstalar sem login ou perder o
+                        acesso), ainda pode pedir a exclusão da conta e dos dados
+                        em nuvem pelo formulário abaixo ou pelo e-mail de
+                        suporte. Use o mesmo e-mail cadastrado na conta, para
+                        localizarmos seu registro nos serviços Firebase.
+                      </>
+                    ) : (
+                      <>
+                        Caso você não tenha acesso ao aplicativo (por exemplo, após
+                        troca de dispositivo ou desinstalação), pode solicitar a
+                        exclusão da conta e dos dados por meio do formulário abaixo
+                        ou diretamente pelo e-mail de suporte.
+                      </>
+                    )}
                   </p>
                   <p className="mt-4 text-base text-[#94a3b8]/90 leading-[1.75]">
                     A solicitação será processada em até 5 dias úteis. Você
@@ -298,9 +416,21 @@ export function ExclusaoContaContent() {
                 Solicitar exclusão
               </h2>
               <p className="mt-4 text-base text-[#94a3b8]/90 leading-[1.75]">
-                Preencha o formulário abaixo para solicitar a exclusão da sua
-                conta ou de dados específicos. Campos obrigatórios estão
-                marcados com asterisco.
+                {slug === "driveflow" ? (
+                  <>
+                    Preencha o formulário para solicitar a exclusão da conta
+                    (incluindo dados em nuvem) ou de dados específicos. Campos
+                    obrigatórios estão marcados com asterisco. Para dados que
+                    existem só no celular, lembre-se de limpar o app ou
+                    desinstalar no aparelho, além deste pedido.
+                  </>
+                ) : (
+                  <>
+                    Preencha o formulário abaixo para solicitar a exclusão da sua
+                    conta ou de dados específicos. Campos obrigatórios estão
+                    marcados com asterisco.
+                  </>
+                )}
               </p>
               <div className="mt-8">{formContent}</div>
             </div>
@@ -308,10 +438,10 @@ export function ExclusaoContaContent() {
 
           <footer className="mt-16 border-t border-white/10 pt-8">
             <Link
-              href="/aplicativos/sellerflow"
+              href={appPath}
               className="inline-flex items-center text-sm font-medium text-[#94a3b8] transition-colors duration-200 ease-out hover:text-white"
             >
-              ← Voltar ao SellerFlow
+              ← Voltar ao {appName}
             </Link>
           </footer>
         </article>

@@ -27,15 +27,15 @@ export default function AplicativosPage() {
         </Container>
       </Section>
 
-      {/* Grid: CTA principal = Ver detalhes do app (em cada card) */}
+      {/* Grid: dois cards lado a lado (preparado para futuro carrossel com mais apps) */}
       <Section variant="default" background="muted">
         <Container size="xl">
-          <div className="flex justify-center">
-            <div className="w-full max-w-md">
-              {apps.map((app) => (
-                <AppCard key={app.id} app={app} />
-              ))}
-            </div>
+          <div className="mx-auto grid w-full max-w-5xl grid-cols-1 gap-8 sm:grid-cols-2 sm:gap-8 lg:gap-10">
+            {apps.map((app) => (
+              <div key={app.id} className="flex min-w-0">
+                <AppCard app={app} className="w-full" />
+              </div>
+            ))}
           </div>
         </Container>
       </Section>
