@@ -8,11 +8,17 @@ type FormErrors = {
   email?: string;
 };
 
-export type ExclusaoAppSlug = "sellerflow" | "driveflow";
+export type ExclusaoAppSlug = "sellerflow" | "driveflow" | "civiflow";
+
+const APP_NAMES: Record<ExclusaoAppSlug, string> = {
+  sellerflow: "SellerFlow",
+  driveflow: "DriveFlow",
+  civiflow: "CiviFlow",
+};
 
 export function ExclusaoContaContent({ slug }: { slug: ExclusaoAppSlug }) {
   const appPath = `/aplicativos/${slug}`;
-  const appName = slug === "driveflow" ? "DriveFlow" : "SellerFlow";
+  const appName = APP_NAMES[slug];
   const [status, setStatus] = useState<"idle" | "submitting" | "success">("idle");
   const [errors, setErrors] = useState<FormErrors>({});
 
@@ -166,6 +172,18 @@ export function ExclusaoContaContent({ slug }: { slug: ExclusaoAppSlug }) {
                   podem exigir um passo à parte no aparelho, como explicamos
                   nas seções abaixo.
                 </>
+              ) : slug === "civiflow" ? (
+                <>
+                  O CiviFlow segue a LGPD e as exigências da Google Play. A
+                  exclusão da conta é permanente: depois de concluída nos
+                  sistemas em nuvem (Firebase), não é possível recuperar os dados
+                  associados ao seu login. Buscamos remover ou anonimizar todos
+                  os registros vinculados à conta — obras, tarefas, materiais,
+                  registros financeiros e demais informações sincronizadas. O que
+                  ficar apenas no aparelho (rascunhos, cache ou fila offline)
+                  precisa ser apagado por você com limpeza local ou desinstalação,
+                  como explicamos nas seções abaixo.
+                </>
               ) : (
                 <>
                   O {appName} está em conformidade com a Lei Geral de Proteção
@@ -212,6 +230,17 @@ export function ExclusaoContaContent({ slug }: { slug: ExclusaoAppSlug }) {
                         perfil mantidos em Firebase ou serviços equivalentes),
                         conforme previsto na versão em uso.
                       </>
+                    ) : slug === "civiflow" ? (
+                      <>
+                        Com o CiviFlow instalado e acesso à sua conta, você pode
+                        pedir a exclusão nas configurações do aplicativo. O
+                        processo encerra de forma definitiva o vínculo da sua
+                        conta com o Firebase e com os dados de obra guardados
+                        em nuvem (obras, tarefas, materiais, registros
+                        financeiros e anexos associados ao seu usuário), conforme
+                        a versão em uso. Confirme somente se deseja apagar tudo de
+                        forma irreversível na nuvem.
+                      </>
                     ) : (
                       <>
                         Se você possui acesso ao SellerFlow instalado no seu
@@ -229,13 +258,25 @@ export function ExclusaoContaContent({ slug }: { slug: ExclusaoAppSlug }) {
                       nas configurações do Android ou desinstale o DriveFlow.
                     </p>
                   )}
+                  {slug === "civiflow" && (
+                    <p className="mt-4 text-base text-[#94a3b8]/90 leading-[1.75]">
+                      Depois de confirmar a exclusão na nuvem, se ainda houver
+                      cópias no celular (rascunhos, cache, listas offline ou
+                      registros não enviados), apague com{" "}
+                      <strong className="font-medium text-white/90">
+                        Configurações do Android → Apps → CiviFlow → Limpar dados
+                      </strong>{" "}
+                      ou desinstale o app — assim você remove também o que ficou
+                      só no dispositivo.
+                    </p>
+                  )}
                   <h3 className="mt-6 text-base font-semibold text-white">
                     Passos para exclusão no app
                   </h3>
                   <ol className="mt-3 list-decimal space-y-2 pl-6 text-base text-[#94a3b8]/90 leading-[1.75]">
                     <li>Abra o aplicativo {appName}</li>
                     <li>
-                      {slug === "driveflow"
+                      {slug === "driveflow" || slug === "civiflow"
                         ? "Abra as configurações ou a área da sua conta / perfil"
                         : "Acesse o menu de configurações ou perfil"}
                     </li>
@@ -323,6 +364,79 @@ export function ExclusaoContaContent({ slug }: { slug: ExclusaoAppSlug }) {
                         desinstalar lá também.
                       </p>
                     </>
+                  ) : slug === "civiflow" ? (
+                    <>
+                      <p className="mt-4 rounded-lg border border-white/15 bg-white/[0.04] px-4 py-3 text-sm text-[#94a3b8]/95 leading-[1.65]">
+                        Atenção: a exclusão da conta é{" "}
+                        <span className="font-semibold text-white/95">
+                          permanente
+                        </span>
+                        . Concluída a remoção nos servidores, não será possível
+                        restaurar obras, tarefas, materiais, registros
+                        financeiros nem outros dados ligados a essa conta na
+                        nuvem.
+                      </p>
+                      <p className="mt-4 text-base text-[#94a3b8]/90 leading-[1.75]">
+                        Tratamos o pedido conforme a LGPD: na nuvem (Firebase e
+                        serviços associados), buscamos eliminar ou anonimizar{" "}
+                        <span className="font-medium text-white/90">
+                          todos os dados vinculados à sua conta
+                        </span>
+                        . No aparelho, a limpeza depende de você, como detalhamos
+                        a seguir.
+                      </p>
+                      <h3 className="mt-6 text-base font-semibold text-white">
+                        Na nuvem (Firebase e serviços associados)
+                      </h3>
+                      <p className="mt-3 text-base text-[#94a3b8]/90 leading-[1.75]">
+                        Ao excluir a conta pelo app ou pelo suporte, almejamos
+                        remover ou anonimizar, entre outros:
+                      </p>
+                      <ul className="mt-4 list-disc space-y-2 pl-6 text-base text-[#94a3b8]/90 leading-[1.75]">
+                        <li>
+                          Dados de login e identificação (por exemplo e-mail no
+                          Firebase Authentication);
+                        </li>
+                        <li>Nome, foto e demais dados de perfil na nuvem;</li>
+                        <li>
+                          Cadastros de obras e projetos, tarefas e cronogramas
+                          vinculados à conta;
+                        </li>
+                        <li>
+                          Movimentações e saldos de materiais, listas e histórico
+                          sincronizados;
+                        </li>
+                        <li>
+                          Lançamentos e registros financeiros (custos, despesas
+                          e valores associados à obra) mantidos no serviço;
+                        </li>
+                        <li>
+                          Indicadores de progresso, medições e arquivos de obra
+                          armazenados em nome da conta, quando aplicável.
+                        </li>
+                      </ul>
+                      <p className="mt-4 text-sm text-[#94a3b8]/75 leading-[1.65]">
+                        Pode haver prazo curto em backups ou registros técnicos
+                        exigidos por lei; nesses casos, os dados deixam de ser
+                        usados de forma ativa até expirarem os ciclos de
+                        retenção.
+                      </p>
+                      <h3 className="mt-6 text-base font-semibold text-white">
+                        No aparelho (dados locais)
+                      </h3>
+                      <p className="mt-3 text-base text-[#94a3b8]/90 leading-[1.75]">
+                        Rascunhos, filas de sincronização, caches e cópias
+                        offline de obras, tarefas, materiais ou lançamentos
+                        financeiros não somem sozinhos só porque a conta foi
+                        excluída na nuvem. Para apagar tudo do dispositivo, use{" "}
+                        <strong className="font-medium text-white/90">
+                          Configurações do Android → Apps → CiviFlow → Limpar
+                          dados
+                        </strong>{" "}
+                        ou desinstale o aplicativo. Se usar outro celular com o
+                        app antigo, repita a limpeza lá também.
+                      </p>
+                    </>
                   ) : (
                     <>
                       <p className="mt-4 text-base text-[#94a3b8]/90 leading-[1.75]">
@@ -375,14 +489,14 @@ export function ExclusaoContaContent({ slug }: { slug: ExclusaoAppSlug }) {
                     Sem acesso ao aplicativo
                   </h2>
                   <p className="mt-4 text-base text-[#94a3b8]/90 leading-[1.75]">
-                    {slug === "driveflow" ? (
+                    {slug === "driveflow" || slug === "civiflow" ? (
                       <>
-                        Se você não consegue abrir o DriveFlow (por exemplo,
-                        após trocar de aparelho, reinstalar sem login ou perder o
-                        acesso), ainda pode pedir a exclusão da conta e dos dados
-                        em nuvem pelo formulário abaixo ou pelo e-mail de
-                        suporte. Use o mesmo e-mail cadastrado na conta, para
-                        localizarmos seu registro nos serviços Firebase.
+                        Se você não consegue abrir o {appName} (por exemplo
+                        após trocar de aparelho ou perder o acesso), ainda pode
+                        pedir a exclusão da conta e dos dados em nuvem pelo
+                        formulário abaixo ou pelo e-mail de suporte. Use o mesmo
+                        e-mail cadastrado na conta, para localizarmos seu registro
+                        nos serviços Firebase.
                       </>
                     ) : (
                       <>
@@ -416,7 +530,16 @@ export function ExclusaoContaContent({ slug }: { slug: ExclusaoAppSlug }) {
                 Solicitar exclusão
               </h2>
               <p className="mt-4 text-base text-[#94a3b8]/90 leading-[1.75]">
-                {slug === "driveflow" ? (
+                {slug === "civiflow" ? (
+                  <>
+                    Preencha o formulário para solicitar a exclusão da conta
+                    (incluindo todos os dados em nuvem vinculados ao seu
+                    e-mail) ou de dados específicos. Campos obrigatórios estão
+                    marcados com asterisco. Para exclusão completa da conta, a
+                    remoção na nuvem é definitiva; no celular, limpe os dados do
+                    app ou desinstale além deste pedido.
+                  </>
+                ) : slug === "driveflow" ? (
                   <>
                     Preencha o formulário para solicitar a exclusão da conta
                     (incluindo dados em nuvem) ou de dados específicos. Campos

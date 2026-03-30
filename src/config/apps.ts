@@ -18,6 +18,17 @@ export const apps: App[] = [
   },
   {
     id: "2",
+    name: "CiviFlow",
+    slug: "civiflow",
+    description:
+      "CiviFlow reúne em um só fluxo a gestão de obras civis e o acompanhamento do que acontece no canteiro: etapas, responsáveis e prazos ficam organizados para reduzir retrabalho e falhas de comunicação.\n\nVocê controla materiais (pedidos, entradas, saídas e saldo), despesas por fase da obra e indicadores de avanço físico frente ao planejado, com leitura clara de custo e progresso.\n\nO app apoia construtoras, empreiteiros e equipes de campo que precisam alinhar tarefas diárias, estoque e orçamento sem depender de planilhas dispersas.",
+    shortDescription:
+      "Gestão de obras: tarefas, materiais, custos e progresso da construção em um só lugar.",
+    status: "em-breve",
+    href: "/aplicativos/civiflow",
+  },
+  {
+    id: "3",
     name: "DriveFlow",
     slug: "driveflow",
     description:

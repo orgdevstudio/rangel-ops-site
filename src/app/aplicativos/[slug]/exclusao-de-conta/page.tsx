@@ -10,7 +10,11 @@ interface PageProps {
   params: Promise<{ slug: string }>;
 }
 
-const ALLOWED_SLUGS: ExclusaoAppSlug[] = ["sellerflow", "driveflow"];
+const ALLOWED_SLUGS: ExclusaoAppSlug[] = [
+  "sellerflow",
+  "driveflow",
+  "civiflow",
+];
 
 export function generateStaticParams() {
   return ALLOWED_SLUGS.map((slug) => ({ slug }));
@@ -30,6 +34,13 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       title: "Exclusão de conta e dados",
       description:
         "Exclusão de conta DriveFlow: dados em nuvem (Firebase), dados locais no aparelho e solicitação por formulário. LGPD e Google Play.",
+    };
+  }
+  if (slug === "civiflow") {
+    return {
+      title: "Exclusão de conta e dados",
+      description:
+        "Exclusão permanente de conta CiviFlow: Firebase, obras, tarefas, materiais, registros financeiros e dados locais. LGPD e Google Play.",
     };
   }
   return {};

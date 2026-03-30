@@ -27,10 +27,10 @@ export default function AplicativosPage() {
         </Container>
       </Section>
 
-      {/* Grid: dois cards lado a lado (preparado para futuro carrossel com mais apps) */}
+      {/* Grid responsivo: cards no mesmo padrão (AppCard); quebra em colunas conforme viewport */}
       <Section variant="default" background="muted">
         <Container size="xl">
-          <div className="mx-auto grid w-full max-w-5xl grid-cols-1 gap-8 sm:grid-cols-2 sm:gap-8 lg:gap-10">
+          <div className="mx-auto grid w-full max-w-5xl grid-cols-1 gap-8 sm:grid-cols-2 sm:gap-8 lg:gap-10 xl:grid-cols-3">
             {apps.map((app) => (
               <div key={app.id} className="flex min-w-0">
                 <AppCard app={app} className="w-full" />

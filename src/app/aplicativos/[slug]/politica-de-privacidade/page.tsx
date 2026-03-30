@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 import { apps } from "@/config/apps";
 import { Section, Container } from "@/components/ui";
 import { PrivacyCard } from "./PrivacyCard";
+import { PoliticaPrivacidadeCiviFlow } from "./PoliticaPrivacidadeCiviFlow";
 import { PoliticaPrivacidadeDriveFlow } from "./PoliticaPrivacidadeDriveFlow";
 
 interface PageProps {
@@ -11,7 +12,11 @@ interface PageProps {
 }
 
 export function generateStaticParams() {
-  return [{ slug: "sellerflow" }, { slug: "driveflow" }];
+  return [
+    { slug: "sellerflow" },
+    { slug: "driveflow" },
+    { slug: "civiflow" },
+  ];
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
@@ -30,6 +35,13 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
         "Política de Privacidade do DriveFlow: Firebase, dados locais de cálculo, serviço de acessibilidade, overlay e direitos LGPD.",
     };
   }
+  if (slug === "civiflow") {
+    return {
+      title: "Política de Privacidade",
+      description:
+        "Política de Privacidade do CiviFlow: Firebase, obras e custos, modo offline, minimização de dados e LGPD.",
+    };
+  }
   return {};
 }
 
@@ -43,6 +55,10 @@ export default async function PoliticaPrivacidadePage({ params }: PageProps) {
 
   if (slug === "driveflow") {
     return <PoliticaPrivacidadeDriveFlow app={app} />;
+  }
+
+  if (slug === "civiflow") {
+    return <PoliticaPrivacidadeCiviFlow app={app} />;
   }
 
   if (slug !== "sellerflow") {
