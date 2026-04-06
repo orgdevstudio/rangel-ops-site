@@ -12,6 +12,13 @@ export async function sendFormspree(payload: FormspreePayload): Promise<void> {
   const controller = new AbortController();
   const timeoutId = setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS);
 
+  /** Formspree usa `_subject` no assunto do e-mail; mantemos `subject` no payload pedido. */
+  const body = JSON.stringify({
+    ...payload,
+    _subject: payload.subject,
+    _replyto: payload.email,
+  });
+
   let response: Response;
 
   try {
@@ -21,11 +28,10 @@ export async function sendFormspree(payload: FormspreePayload): Promise<void> {
         "Content-Type": "application/json",
         Accept: "application/json",
       },
-      body: JSON.stringify(payload),
+      body,
       signal: controller.signal,
     });
   } catch {
-    clearTimeout(timeoutId);
     throw new Error("FORMSPREE_SEND_FAILED");
   } finally {
     clearTimeout(timeoutId);

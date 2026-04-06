@@ -44,12 +44,10 @@ export function ExclusaoContaContent({ slug }: { slug: ExclusaoAppSlug }) {
       message: data.mensagem ?? "",
     });
 
-    const err: FormErrors = {
-      nome: baseErrors.name,
-      email: baseErrors.email,
-      mensagem: baseErrors.message,
-    };
-
+    const err: FormErrors = {};
+    if (baseErrors.name) err.nome = baseErrors.name;
+    if (baseErrors.email) err.email = baseErrors.email;
+    if (baseErrors.message) err.mensagem = baseErrors.message;
     if (!data.tipo?.trim()) {
       err.tipo = "Tipo de solicitação é obrigatório.";
     }
