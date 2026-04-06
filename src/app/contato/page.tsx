@@ -15,7 +15,7 @@ type FormErrors = {
 };
 
 export default function ContatoPage() {
-  const [status, setStatus] = useState<"idle" | "submitting" | "success">(
+  const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">(
     "idle"
   );
   const [errors, setErrors] = useState<FormErrors>({});
@@ -43,11 +43,12 @@ export default function ContatoPage() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const form = e.currentTarget;
+    const formData = new FormData(form);
     const data = {
-      nome: (form.nome as HTMLInputElement).value,
-      email: (form.email as HTMLInputElement).value,
-      assunto: (form.assunto as HTMLSelectElement).value,
-      mensagem: (form.mensagem as HTMLTextAreaElement).value,
+      nome: String(formData.get("nome") ?? ""),
+      email: String(formData.get("email") ?? ""),
+      assunto: String(formData.get("assunto") ?? ""),
+      mensagem: String(formData.get("mensagem") ?? ""),
     };
 
     const err = validate(data);
@@ -68,8 +69,9 @@ export default function ContatoPage() {
       });
 
       setStatus("success");
+      form.reset();
     } catch {
-      setStatus("idle");
+      setStatus("error");
       setErrors({
         submit: "Não foi possível enviar, tente novamente",
       });
@@ -203,10 +205,14 @@ export default function ContatoPage() {
             </p>
           )}
         </div>
-        {errors.submit && (
-          <p className="text-sm text-red-400" role="alert" aria-live="polite">
-            {errors.submit}
-          </p>
+        {status === "error" && errors.submit && (
+          <div
+            className="rounded-lg border border-red-500/30 bg-red-500/10 px-4 py-3"
+            role="alert"
+            aria-live="polite"
+          >
+            <p className="text-sm text-red-300">{errors.submit}</p>
+          </div>
         )}
         <div className="flex flex-col gap-3 sm:flex-row-reverse sm:justify-center">
           <Button

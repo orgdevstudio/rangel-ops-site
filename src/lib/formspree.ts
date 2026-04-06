@@ -1,4 +1,5 @@
 const FORMSPREE_ENDPOINT = "https://formspree.io/f/xwvnqoyq";
+const REQUEST_TIMEOUT_MS = 15000;
 
 export interface FormspreePayload {
   name: string;
@@ -8,13 +9,27 @@ export interface FormspreePayload {
 }
 
 export async function sendFormspree(payload: FormspreePayload): Promise<void> {
-  const response = await fetch(FORMSPREE_ENDPOINT, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(payload),
-  });
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS);
+
+  let response: Response;
+
+  try {
+    response = await fetch(FORMSPREE_ENDPOINT, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify(payload),
+      signal: controller.signal,
+    });
+  } catch {
+    clearTimeout(timeoutId);
+    throw new Error("FORMSPREE_SEND_FAILED");
+  } finally {
+    clearTimeout(timeoutId);
+  }
 
   if (!response.ok) {
     throw new Error("FORMSPREE_SEND_FAILED");

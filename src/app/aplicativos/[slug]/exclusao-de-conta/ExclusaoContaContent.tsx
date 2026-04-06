@@ -29,7 +29,7 @@ const REQUEST_TYPE_LABELS = {
 export function ExclusaoContaContent({ slug }: { slug: ExclusaoAppSlug }) {
   const appPath = `/aplicativos/${slug}`;
   const appName = APP_NAMES[slug];
-  const [status, setStatus] = useState<"idle" | "submitting" | "success">("idle");
+  const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
   const [errors, setErrors] = useState<FormErrors>({});
 
   const validate = (data: {
@@ -60,11 +60,12 @@ export function ExclusaoContaContent({ slug }: { slug: ExclusaoAppSlug }) {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const form = e.currentTarget;
+    const formData = new FormData(form);
     const data = {
-      nome: (form.nome as HTMLInputElement).value,
-      email: (form.email as HTMLInputElement).value,
-      tipo: (form.tipo as HTMLSelectElement).value,
-      mensagem: (form.mensagem as HTMLTextAreaElement).value,
+      nome: String(formData.get("nome") ?? ""),
+      email: String(formData.get("email") ?? ""),
+      tipo: String(formData.get("tipo") ?? ""),
+      mensagem: String(formData.get("mensagem") ?? ""),
     };
 
     const err = validate(data);
@@ -89,8 +90,9 @@ export function ExclusaoContaContent({ slug }: { slug: ExclusaoAppSlug }) {
         message: data.mensagem.trim(),
       });
       setStatus("success");
+      form.reset();
     } catch {
-      setStatus("idle");
+      setStatus("error");
       setErrors({
         submit: "Não foi possível enviar, tente novamente",
       });
@@ -119,6 +121,17 @@ export function ExclusaoContaContent({ slug }: { slug: ExclusaoAppSlug }) {
       </div>
     ) : (
       <form onSubmit={handleSubmit} className="space-y-6" noValidate>
+        <div>
+          {status === "error" && errors.submit && (
+            <div
+              className="rounded-lg border border-red-500/30 bg-red-500/10 px-4 py-3"
+              role="alert"
+              aria-live="polite"
+            >
+              <p className="text-sm text-red-300">{errors.submit}</p>
+            </div>
+          )}
+        </div>
         <div>
           <label
             htmlFor="nome"
@@ -221,11 +234,6 @@ export function ExclusaoContaContent({ slug }: { slug: ExclusaoAppSlug }) {
             </p>
           )}
         </div>
-        {errors.submit && (
-          <p className="text-sm text-red-400" role="alert" aria-live="polite">
-            {errors.submit}
-          </p>
-        )}
         <Button
           type="submit"
           disabled={status === "submitting"}
