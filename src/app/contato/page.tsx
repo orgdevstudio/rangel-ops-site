@@ -4,11 +4,14 @@ import { useState } from "react";
 import Link from "next/link";
 import { Section, Container } from "@/components/ui";
 import { Button } from "@/components/ui";
+import { sendFormspree, validateBaseForm } from "@/lib/formspree";
 
 type FormErrors = {
   nome?: string;
   email?: string;
+  assunto?: string;
   mensagem?: string;
+  submit?: string;
 };
 
 export default function ContatoPage() {
@@ -18,13 +21,22 @@ export default function ContatoPage() {
   const [errors, setErrors] = useState<FormErrors>({});
 
   const validate = (data: Record<string, string>): FormErrors => {
-    const err: FormErrors = {};
-    if (!data.nome?.trim()) err.nome = "Nome é obrigatório.";
-    if (!data.email?.trim()) err.email = "E-mail é obrigatório.";
-    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)) {
-      err.email = "Informe um e-mail válido.";
+    const baseErrors = validateBaseForm({
+      name: data.nome ?? "",
+      email: data.email ?? "",
+      message: data.mensagem ?? "",
+    });
+
+    const err: FormErrors = {
+      nome: baseErrors.name,
+      email: baseErrors.email,
+      mensagem: baseErrors.message,
+    };
+
+    if (!data.assunto?.trim()) {
+      err.assunto = "Assunto é obrigatório.";
     }
-    if (!data.mensagem?.trim()) err.mensagem = "Mensagem é obrigatória.";
+
     return err;
   };
 
@@ -34,6 +46,7 @@ export default function ContatoPage() {
     const data = {
       nome: (form.nome as HTMLInputElement).value,
       email: (form.email as HTMLInputElement).value,
+      assunto: (form.assunto as HTMLSelectElement).value,
       mensagem: (form.mensagem as HTMLTextAreaElement).value,
     };
 
@@ -45,8 +58,22 @@ export default function ContatoPage() {
 
     setErrors({});
     setStatus("submitting");
-    await new Promise((r) => setTimeout(r, 1000));
-    setStatus("success");
+
+    try {
+      await sendFormspree({
+        name: data.nome.trim(),
+        email: data.email.trim(),
+        subject: `Contato - ${data.assunto}`,
+        message: data.mensagem.trim(),
+      });
+
+      setStatus("success");
+    } catch {
+      setStatus("idle");
+      setErrors({
+        submit: "Não foi possível enviar, tente novamente",
+      });
+    }
   };
 
   const formContent =
@@ -122,6 +149,38 @@ export default function ContatoPage() {
         </div>
         <div>
           <label
+            htmlFor="assunto"
+            className="block text-sm font-medium text-white"
+          >
+            Assunto
+          </label>
+          <select
+            id="assunto"
+            name="assunto"
+            required
+            className="mt-2 block w-full rounded-lg border border-white/20 bg-white/5 px-4 py-3 text-white focus:border-[#0EA5E9] focus:outline-none focus:ring-1 focus:ring-[#0EA5E9] disabled:opacity-50 [&>option]:bg-[#0A1624]"
+            disabled={status === "submitting"}
+            aria-invalid={!!errors.assunto}
+            aria-describedby={errors.assunto ? "assunto-error" : undefined}
+            defaultValue=""
+          >
+            <option value="" disabled>
+              Selecione o assunto
+            </option>
+            <option value="Falar com especialista">Falar com especialista</option>
+            <option value="Dúvida comercial">Dúvida comercial</option>
+            <option value="Suporte técnico">Suporte técnico</option>
+            <option value="Parceria">Parceria</option>
+            <option value="Outros">Outros</option>
+          </select>
+          {errors.assunto && (
+            <p id="assunto-error" className="mt-1 text-sm text-red-400">
+              {errors.assunto}
+            </p>
+          )}
+        </div>
+        <div>
+          <label
             htmlFor="mensagem"
             className="block text-sm font-medium text-white"
           >
@@ -144,6 +203,11 @@ export default function ContatoPage() {
             </p>
           )}
         </div>
+        {errors.submit && (
+          <p className="text-sm text-red-400" role="alert" aria-live="polite">
+            {errors.submit}
+          </p>
+        )}
         <div className="flex flex-col gap-3 sm:flex-row-reverse sm:justify-center">
           <Button
             type="submit"

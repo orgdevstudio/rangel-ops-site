@@ -3,9 +3,14 @@
 import { useState } from "react";
 import Link from "next/link";
 import { Section, Container, Button } from "@/components/ui";
+import { sendFormspree, validateBaseForm } from "@/lib/formspree";
 
 type FormErrors = {
+  nome?: string;
   email?: string;
+  tipo?: string;
+  mensagem?: string;
+  submit?: string;
 };
 
 export type ExclusaoAppSlug = "sellerflow" | "driveflow" | "civiflow";
@@ -16,18 +21,39 @@ const APP_NAMES: Record<ExclusaoAppSlug, string> = {
   civiflow: "CiviFlow",
 };
 
+const REQUEST_TYPE_LABELS = {
+  "conta-completa": "Excluir minha conta completa",
+  "dados-especificos": "Solicitar exclusão de dados específicos",
+} as const;
+
 export function ExclusaoContaContent({ slug }: { slug: ExclusaoAppSlug }) {
   const appPath = `/aplicativos/${slug}`;
   const appName = APP_NAMES[slug];
   const [status, setStatus] = useState<"idle" | "submitting" | "success">("idle");
   const [errors, setErrors] = useState<FormErrors>({});
 
-  const validate = (data: { email: string }): FormErrors => {
-    const err: FormErrors = {};
-    if (!data.email?.trim()) err.email = "E-mail é obrigatório.";
-    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)) {
-      err.email = "Informe um e-mail válido.";
+  const validate = (data: {
+    nome: string;
+    email: string;
+    tipo: string;
+    mensagem: string;
+  }): FormErrors => {
+    const baseErrors = validateBaseForm({
+      name: data.nome ?? "",
+      email: data.email ?? "",
+      message: data.mensagem ?? "",
+    });
+
+    const err: FormErrors = {
+      nome: baseErrors.name,
+      email: baseErrors.email,
+      mensagem: baseErrors.message,
+    };
+
+    if (!data.tipo?.trim()) {
+      err.tipo = "Tipo de solicitação é obrigatório.";
     }
+
     return err;
   };
 
@@ -35,9 +61,10 @@ export function ExclusaoContaContent({ slug }: { slug: ExclusaoAppSlug }) {
     e.preventDefault();
     const form = e.currentTarget;
     const data = {
+      nome: (form.nome as HTMLInputElement).value,
       email: (form.email as HTMLInputElement).value,
       tipo: (form.tipo as HTMLSelectElement).value,
-      descricao: (form.descricao as HTMLTextAreaElement).value,
+      mensagem: (form.mensagem as HTMLTextAreaElement).value,
     };
 
     const err = validate(data);
@@ -48,8 +75,26 @@ export function ExclusaoContaContent({ slug }: { slug: ExclusaoAppSlug }) {
 
     setErrors({});
     setStatus("submitting");
-    await new Promise((r) => setTimeout(r, 1000));
-    setStatus("success");
+
+    const tipoLabel =
+      REQUEST_TYPE_LABELS[data.tipo as keyof typeof REQUEST_TYPE_LABELS] ??
+      data.tipo;
+    const subject = `Exclusão de conta - ${appName} - ${tipoLabel}`;
+
+    try {
+      await sendFormspree({
+        name: data.nome.trim(),
+        email: data.email.trim(),
+        subject,
+        message: data.mensagem.trim(),
+      });
+      setStatus("success");
+    } catch {
+      setStatus("idle");
+      setErrors({
+        submit: "Não foi possível enviar, tente novamente",
+      });
+    }
   };
 
   const formContent =
@@ -74,6 +119,31 @@ export function ExclusaoContaContent({ slug }: { slug: ExclusaoAppSlug }) {
       </div>
     ) : (
       <form onSubmit={handleSubmit} className="space-y-6" noValidate>
+        <div>
+          <label
+            htmlFor="nome"
+            className="block text-sm font-medium text-white"
+          >
+            Nome <span className="text-red-400">*</span>
+          </label>
+          <input
+            id="nome"
+            name="nome"
+            type="text"
+            required
+            autoComplete="name"
+            className="mt-2 block w-full rounded-lg border border-white/20 bg-white/5 px-4 py-3 text-white placeholder-[#94a3b8]/60 focus:border-[#0EA5E9] focus:outline-none focus:ring-1 focus:ring-[#0EA5E9] disabled:opacity-50"
+            placeholder="Seu nome completo"
+            disabled={status === "submitting"}
+            aria-invalid={!!errors.nome}
+            aria-describedby={errors.nome ? "nome-error" : undefined}
+          />
+          {errors.nome && (
+            <p id="nome-error" className="mt-1 text-sm text-red-400">
+              {errors.nome}
+            </p>
+          )}
+        </div>
         <div>
           <label
             htmlFor="email"
@@ -109,8 +179,11 @@ export function ExclusaoContaContent({ slug }: { slug: ExclusaoAppSlug }) {
             required
             className="mt-2 block w-full rounded-lg border border-white/20 bg-white/5 px-4 py-3 text-white focus:border-[#0EA5E9] focus:outline-none focus:ring-1 focus:ring-[#0EA5E9] disabled:opacity-50 [&>option]:bg-[#0A1624]"
             disabled={status === "submitting"}
+            aria-invalid={!!errors.tipo}
+            aria-describedby={errors.tipo ? "tipo-error" : undefined}
+            defaultValue=""
           >
-            <option value="">Selecione uma opção</option>
+            <option value="" disabled>Selecione uma opção</option>
             <option value="conta-completa">
               Excluir minha conta completa
             </option>
@@ -118,23 +191,41 @@ export function ExclusaoContaContent({ slug }: { slug: ExclusaoAppSlug }) {
               Solicitar exclusão de dados específicos
             </option>
           </select>
+          {errors.tipo && (
+            <p id="tipo-error" className="mt-1 text-sm text-red-400">
+              {errors.tipo}
+            </p>
+          )}
         </div>
         <div>
           <label
-            htmlFor="descricao"
+            htmlFor="mensagem"
             className="block text-sm font-medium text-white"
           >
-            Descrição <span className="text-[#94a3b8]/70">(opcional)</span>
+            Mensagem <span className="text-red-400">*</span>
           </label>
           <textarea
-            id="descricao"
-            name="descricao"
+            id="mensagem"
+            name="mensagem"
             rows={4}
+            required
             className="mt-2 block w-full rounded-lg border border-white/20 bg-white/5 px-4 py-3 text-white placeholder-[#94a3b8]/60 focus:border-[#0EA5E9] focus:outline-none focus:ring-1 focus:ring-[#0EA5E9] disabled:opacity-50"
-            placeholder="Descreva os dados específicos que deseja excluir ou forneça informações adicionais."
+            placeholder="Descreva sua solicitação de exclusão."
             disabled={status === "submitting"}
+            aria-invalid={!!errors.mensagem}
+            aria-describedby={errors.mensagem ? "mensagem-error" : undefined}
           />
+          {errors.mensagem && (
+            <p id="mensagem-error" className="mt-1 text-sm text-red-400">
+              {errors.mensagem}
+            </p>
+          )}
         </div>
+        {errors.submit && (
+          <p className="text-sm text-red-400" role="alert" aria-live="polite">
+            {errors.submit}
+          </p>
+        )}
         <Button
           type="submit"
           disabled={status === "submitting"}
@@ -529,6 +620,14 @@ export function ExclusaoContaContent({ slug }: { slug: ExclusaoAppSlug }) {
               <h2 className="text-xl font-bold tracking-tight text-white sm:text-2xl">
                 Solicitar exclusão
               </h2>
+              <div className="mt-6 rounded-lg border border-[#0EA5E9]/30 bg-[#0EA5E9]/10 px-4 py-3">
+                <p className="text-xs uppercase tracking-[0.12em] text-[#94a3b8]/80">
+                  Assunto do envio
+                </p>
+                <p className="mt-1 text-sm font-medium text-white">
+                  Exclusão de conta - {appName}
+                </p>
+              </div>
               <p className="mt-4 text-base text-[#94a3b8]/90 leading-[1.75]">
                 {slug === "civiflow" ? (
                   <>
