@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { apps } from "@/config/apps";
+import { AppIcon } from "@/components/apps";
 import { Section, Container, SectionReveal } from "@/components/ui";
 
 export function AppsPreview() {
@@ -24,9 +25,7 @@ export function AppsPreview() {
               className="group block w-full max-w-md"
             >
               <div className="rounded-2xl border border-white/[0.06] bg-white/[0.03] backdrop-blur-sm p-8 lg:p-10 transition-all duration-300 ease-out hover:bg-white/[0.06] hover:border-white/10 hover:-translate-y-px hover:shadow-[0_8px_24px_-4px_rgba(0,0,0,0.12)] group-hover:shadow-[0_8px_28px_-4px_rgba(0,0,0,0.14),0_0_20px_rgba(14,165,233,0.05)] min-h-[220px] flex flex-col">
-                <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#0EA5E9]/15 text-[#0EA5E9] font-bold text-lg shrink-0">
-                  {app.name.charAt(0)}
-                </div>
+                <AppIcon app={app} size="sm" />
                 <h3 className="mt-8 font-bold tracking-tight text-white group-hover:text-[#0EA5E9] transition-colors duration-300 ease-out text-lg leading-snug">
                   {app.name}
                 </h3>

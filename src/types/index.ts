@@ -9,6 +9,7 @@ export interface App {
   slug: string;
   description: string;
   shortDescription?: string;
+  /** Caminho público do ícone (ex.: `/images/apps/sellerflow.png` em `public/images/apps/`). */
   icon?: string;
   href?: string;
   status?: "disponivel" | "em-breve" | "beta";

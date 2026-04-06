@@ -4,7 +4,7 @@ import type { Metadata } from "next";
 import { apps } from "@/config/apps";
 import { Section, Container } from "@/components/ui";
 import { Button } from "@/components/ui";
-import { StoreButtonsModal } from "@/components/apps";
+import { AppIcon, StoreButtonsModal } from "@/components/apps";
 
 interface AppPageProps {
   params: Promise<{ slug: string }>;
@@ -47,9 +47,7 @@ export default async function AppPage({ params }: AppPageProps) {
             ← Voltar às soluções
           </Link>
           <div className="mt-12 flex justify-center">
-            <div className="flex h-20 w-20 items-center justify-center rounded-2xl bg-[#0EA5E9]/20 text-[#0EA5E9] font-bold text-2xl">
-              {app.name.charAt(0)}
-            </div>
+            <AppIcon app={app} size="lg" />
           </div>
           <h1 className="mt-10 text-center text-4xl font-bold tracking-tight text-white sm:text-5xl lg:text-6xl leading-[1.2]">
             {app.name}

@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { App } from "@/types";
 import { Card } from "@/components/ui";
 import { cn } from "@/lib/utils";
+import { AppIcon } from "./AppIcon";
 
 export interface AppCardProps {
   app: App;
@@ -37,9 +38,7 @@ export function AppCard({ app, className }: AppCardProps) {
       )}
     >
       <div className="flex items-start justify-between gap-4">
-        <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-[#0EA5E9]/20 text-[#0EA5E9] font-bold text-lg group-hover:bg-[#0EA5E9]/30 transition-colors duration-300 ease-out">
-          {app.name.charAt(0)}
-        </div>
+        <AppIcon app={app} size="sm" />
         {app.status && (
           <span
             className={cn(
