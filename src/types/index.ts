@@ -12,6 +12,8 @@ export interface App {
   /** Caminho público do ícone (ex.: `/images/apps/sellerflow.png` em `public/images/apps/`). */
   icon?: string;
   href?: string;
+  googlePlayUrl?: string;
+  appStoreUrl?: string;
   status?: "disponivel" | "em-breve" | "beta";
 }
 

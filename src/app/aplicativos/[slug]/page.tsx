@@ -131,7 +131,11 @@ export default async function AppPage({ params }: AppPageProps) {
               <p className="mb-4 text-center text-sm font-medium text-[#94a3b8]/80">
                 Baixe o app
               </p>
-              <StoreButtonsModal appName={app.name} />
+              <StoreButtonsModal
+                appName={app.name}
+                googlePlayUrl={app.googlePlayUrl}
+                appStoreUrl={app.appStoreUrl}
+              />
             </div>
             <Link href="/contato" className="inline-block">
               <Button variant="outline" className="border-[#0EA5E9] text-[#0EA5E9] hover:bg-[#0EA5E9]/10">

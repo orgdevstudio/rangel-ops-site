@@ -17,20 +17,50 @@ const AppleIcon = () => (
 type StoreButtonsModalProps = {
   /** Nome do app exibido no modal (ex.: SellerFlow, DriveFlow). */
   appName: string;
+  /** URL pública da Google Play para o app. */
+  googlePlayUrl?: string;
+  /** URL pública da App Store para o app. */
+  appStoreUrl?: string;
 };
 
-export function StoreButtonsModal({ appName }: StoreButtonsModalProps) {
+export function StoreButtonsModal({
+  appName,
+  googlePlayUrl,
+  appStoreUrl,
+}: StoreButtonsModalProps) {
   const [isOpen, setIsOpen] = useState(false);
+  const [selectedStore, setSelectedStore] = useState<"Google Play" | "App Store">(
+    "Google Play"
+  );
 
-  const openModal = () => setIsOpen(true);
+  const openModal = (store: "Google Play" | "App Store") => {
+    setSelectedStore(store);
+    setIsOpen(true);
+  };
   const closeModal = () => setIsOpen(false);
+
+  const handleGooglePlayClick = () => {
+    if (googlePlayUrl) {
+      window.open(googlePlayUrl, "_blank", "noopener,noreferrer");
+      return;
+    }
+    openModal("Google Play");
+  };
+
+  const handleAppStoreClick = () => {
+    if (appStoreUrl) {
+      window.open(appStoreUrl, "_blank", "noopener,noreferrer");
+      return;
+    }
+    openModal("App Store");
+  };
 
   return (
     <>
       <div className="flex flex-wrap justify-center gap-4">
         <button
           type="button"
-          onClick={openModal}
+          onClick={handleGooglePlayClick}
           className="flex items-center gap-3 rounded-xl bg-[#1e293b] px-5 py-3.5 text-white transition-all duration-200 ease-out hover:bg-[#334155]"
         >
           <GooglePlayIcon />
@@ -41,7 +71,7 @@ export function StoreButtonsModal({ appName }: StoreButtonsModalProps) {
         </button>
         <button
           type="button"
-          onClick={openModal}
+          onClick={handleAppStoreClick}
           className="flex items-center gap-3 rounded-xl bg-[#1e293b] px-5 py-3.5 text-white transition-all duration-200 ease-out hover:bg-[#334155]"
         >
           <AppleIcon />
@@ -69,8 +99,8 @@ export function StoreButtonsModal({ appName }: StoreButtonsModalProps) {
               Disponível em breve
             </h2>
             <p className="mt-4 text-center text-[#94a3b8]/90">
-              O {appName} estará disponível em breve na Google Play e na App Store.
-              Enquanto isso, entre em contato para saber mais.
+              O {appName} ainda não está disponível na {selectedStore}. Enquanto isso,
+              entre em contato para saber mais.
             </p>
             <button
               type="button"

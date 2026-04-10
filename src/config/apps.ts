@@ -14,8 +14,9 @@ export const apps: App[] = [
     shortDescription:
       "Solução inteligente para vendedores: precificação, fechamentos e resultados de vendas com precisão.",
     icon: "/images/apps/sellerflow.png",
-    status: "em-breve",
+    status: "disponivel",
     href: "/aplicativos/sellerflow",
+    googlePlayUrl: "https://play.google.com/store/apps/details?id=com.sellerflow.app",
   },
   {
     id: "2",
