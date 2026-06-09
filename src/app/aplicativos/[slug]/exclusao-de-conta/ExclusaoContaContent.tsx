@@ -13,12 +13,13 @@ type FormErrors = {
   submit?: string;
 };
 
-export type ExclusaoAppSlug = "sellerflow" | "driveflow" | "civiflow";
+export type ExclusaoAppSlug = "sellerflow" | "driveflow" | "civiflow" | "rotivy";
 
 const APP_NAMES: Record<ExclusaoAppSlug, string> = {
   sellerflow: "SellerFlow",
   driveflow: "DriveFlow",
   civiflow: "CiviFlow",
+  rotivy: "Rotivy",
 };
 
 const REQUEST_TYPE_LABELS = {
@@ -269,6 +270,15 @@ export function ExclusaoContaContent({ slug }: { slug: ExclusaoAppSlug }) {
                   podem exigir um passo à parte no aparelho, como explicamos
                   nas seções abaixo.
                 </>
+              ) : slug === "rotivy" ? (
+                <>
+                  O Rotivy segue a LGPD e as exigências da Google Play. Você
+                  pode solicitar a exclusão da sua conta e dos dados tratados em
+                  nossos sistemas. A conta utiliza Firebase para autenticação,
+                  perfil e configuração; rotas, paradas e dados operacionais
+                  ficam majoritariamente no aparelho e exigem limpeza local
+                  separada, como detalhamos abaixo.
+                </>
               ) : slug === "civiflow" ? (
                 <>
                   O CiviFlow segue a LGPD e as exigências da Google Play. A
@@ -327,6 +337,17 @@ export function ExclusaoContaContent({ slug }: { slug: ExclusaoAppSlug }) {
                         perfil mantidos em Firebase ou serviços equivalentes),
                         conforme previsto na versão em uso.
                       </>
+                    ) : slug === "rotivy" ? (
+                      <>
+                        Com o Rotivy instalado e acesso à sua conta, você pode
+                        encerrar a sessão pelo perfil do aplicativo. Esse fluxo
+                        remove os dados operacionais locais deste aparelho
+                        (rotas, paradas, cache de execução e preferências
+                        operacionais). A exclusão completa da conta e dos dados em
+                        nuvem (Firebase) pode ser solicitada pelo formulário
+                        abaixo ou pelo suporte, até que o fluxo in-app de
+                        exclusão de conta esteja disponível na versão publicada.
+                      </>
                     ) : slug === "civiflow" ? (
                       <>
                         Com o CiviFlow instalado e acesso à sua conta, você pode
@@ -367,18 +388,44 @@ export function ExclusaoContaContent({ slug }: { slug: ExclusaoAppSlug }) {
                       só no dispositivo.
                     </p>
                   )}
+                  {slug === "rotivy" && (
+                    <p className="mt-4 text-base text-[#94a3b8]/90 leading-[1.75]">
+                      Para remover também o que ficou só no aparelho após sair da
+                      conta, use{" "}
+                      <strong className="font-medium text-white/90">
+                        Configurações do Android → Apps → Rotivy → Limpar dados
+                      </strong>{" "}
+                      ou desinstale o aplicativo.
+                    </p>
+                  )}
                   <h3 className="mt-6 text-base font-semibold text-white">
-                    Passos para exclusão no app
+                    {slug === "rotivy"
+                      ? "Passos para limpar dados locais no app"
+                      : "Passos para exclusão no app"}
                   </h3>
                   <ol className="mt-3 list-decimal space-y-2 pl-6 text-base text-[#94a3b8]/90 leading-[1.75]">
                     <li>Abra o aplicativo {appName}</li>
                     <li>
-                      {slug === "driveflow" || slug === "civiflow"
-                        ? "Abra as configurações ou a área da sua conta / perfil"
-                        : "Acesse o menu de configurações ou perfil"}
+                      {slug === "rotivy"
+                        ? "Acesse o perfil ou a área da sua conta"
+                        : slug === "driveflow" || slug === "civiflow"
+                          ? "Abra as configurações ou a área da sua conta / perfil"
+                          : "Acesse o menu de configurações ou perfil"}
                     </li>
-                    <li>Selecione a opção &quot;Excluir conta&quot;</li>
-                    <li>Confirme a exclusão quando solicitado</li>
+                    {slug === "rotivy" ? (
+                      <>
+                        <li>Selecione &quot;Sair da conta&quot;</li>
+                        <li>
+                          Confirme a ação quando solicitado — os dados
+                          operacionais locais deste aparelho serão removidos
+                        </li>
+                      </>
+                    ) : (
+                      <>
+                        <li>Selecione a opção &quot;Excluir conta&quot;</li>
+                        <li>Confirme a exclusão quando solicitado</li>
+                      </>
+                    )}
                   </ol>
                 </div>
               </div>
@@ -459,6 +506,59 @@ export function ExclusaoContaContent({ slug }: { slug: ExclusaoAppSlug }) {
                         ou desinstale o aplicativo. Se você trocar de celular sem
                         limpar o app antigo, considere apagar os dados ou
                         desinstalar lá também.
+                      </p>
+                    </>
+                  ) : slug === "rotivy" ? (
+                    <>
+                      <p className="mt-4 text-base text-[#94a3b8]/90 leading-[1.75]">
+                        A exclusão da conta afeta de forma distinta o que está na
+                        nuvem e o que está só no seu celular. Tratamos o pedido
+                        com base na LGPD e no direito à eliminação dos dados
+                        quando aplicável.
+                      </p>
+                      <h3 className="mt-6 text-base font-semibold text-white">
+                        Na nuvem (Firebase e serviços associados)
+                      </h3>
+                      <p className="mt-3 text-base text-[#94a3b8]/90 leading-[1.75]">
+                        Ao solicitar a exclusão pelo formulário ou suporte,
+                        buscamos remover ou anonimizar, nos sistemas que
+                        controlamos:
+                      </p>
+                      <ul className="mt-4 list-disc space-y-2 pl-6 text-base text-[#94a3b8]/90 leading-[1.75]">
+                        <li>
+                          Dados de login e identificação da conta (e-mail no
+                          Firebase Authentication);
+                        </li>
+                        <li>Nome, foto e demais dados de perfil na nuvem;</li>
+                        <li>
+                          Configuração inicial, status de permissões e token FCM
+                          vinculados à conta;
+                        </li>
+                        <li>
+                          Registros associados à conta nos bancos de dados
+                          utilizados pelo Rotivy, quando existirem.
+                        </li>
+                      </ul>
+                      <p className="mt-4 text-sm text-[#94a3b8]/75 leading-[1.65]">
+                        Pode haver prazo curto de retenção em backups ou registros
+                        técnicos exigidos por lei; nesses casos, os dados deixam
+                        de ser usados para finalidade ativa e são eliminados
+                        quando o backup expira.
+                      </p>
+                      <h3 className="mt-6 text-base font-semibold text-white">
+                        No aparelho (dados locais)
+                      </h3>
+                      <p className="mt-3 text-base text-[#94a3b8]/90 leading-[1.75]">
+                        Rotas, paradas, snapshots de otimização, cache de
+                        execução e preferências operacionais ficam
+                        majoritariamente no dispositivo. Eles não são apagados
+                        automaticamente pela exclusão da conta na nuvem. Para
+                        remover tudo localmente, saia da conta pelo app, use{" "}
+                        <strong className="font-medium text-white/90">
+                          Configurações do Android → Apps → Rotivy → Limpar dados
+                        </strong>{" "}
+                        ou desinstale o aplicativo. Se usar outro celular com o
+                        app antigo, repita a limpeza lá também.
                       </p>
                     </>
                   ) : slug === "civiflow" ? (
@@ -586,7 +686,7 @@ export function ExclusaoContaContent({ slug }: { slug: ExclusaoAppSlug }) {
                     Sem acesso ao aplicativo
                   </h2>
                   <p className="mt-4 text-base text-[#94a3b8]/90 leading-[1.75]">
-                    {slug === "driveflow" || slug === "civiflow" ? (
+                    {slug === "driveflow" || slug === "civiflow" || slug === "rotivy" ? (
                       <>
                         Se você não consegue abrir o {appName} (por exemplo
                         após trocar de aparelho ou perder o acesso), ainda pode
@@ -643,6 +743,15 @@ export function ExclusaoContaContent({ slug }: { slug: ExclusaoAppSlug }) {
                     marcados com asterisco. Para exclusão completa da conta, a
                     remoção na nuvem é definitiva; no celular, limpe os dados do
                     app ou desinstale além deste pedido.
+                  </>
+                ) : slug === "rotivy" ? (
+                  <>
+                    Preencha o formulário para solicitar a exclusão da conta
+                    (incluindo dados em nuvem vinculados ao seu e-mail) ou de
+                    dados específicos. Campos obrigatórios estão marcados com
+                    asterisco. Para rotas e paradas que existem só no celular,
+                    lembre-se de sair da conta, limpar os dados do app ou
+                    desinstalar no aparelho, além deste pedido.
                   </>
                 ) : slug === "driveflow" ? (
                   <>

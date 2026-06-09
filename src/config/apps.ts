@@ -17,6 +17,7 @@ export const apps: App[] = [
     status: "disponivel",
     href: "/aplicativos/sellerflow",
     googlePlayUrl: "https://play.google.com/store/apps/details?id=com.sellerflow.app",
+    hasLegalPages: true,
   },
   {
     id: "2",
@@ -28,6 +29,13 @@ export const apps: App[] = [
       "Gestão de obras: tarefas, materiais, custos e progresso da construção em um só lugar.",
     status: "em-breve",
     href: "/aplicativos/civiflow",
+    hasLegalPages: true,
+    featureHighlights: [
+      "Visão integrada da obra: etapas, responsáveis e organização de tarefas para manter equipes e prazos alinhados ao planejamento.",
+      "Controle de materiais com rastreio de entradas, saídas e saldo, reduzindo desperdício e falta de insumos no canteiro.",
+      "Custos por fase e leitura de despesas frente ao orçamento, com apoio a decisões financeiras durante a construção.",
+      "Acompanhamento de progresso físico da obra e indicadores de avanço para comparar execução com o que foi planejado.",
+    ],
   },
   {
     id: "3",
@@ -39,5 +47,28 @@ export const apps: App[] = [
       "Cálculos e lucro para motoristas de aplicativo: análise rápida de cada corrida antes de você seguir.",
     status: "em-breve",
     href: "/aplicativos/driveflow",
+    hasLegalPages: true,
+  },
+  {
+    id: "4",
+    name: "Rotivy",
+    slug: "rotivy",
+    description:
+      "Rotivy é uma plataforma premium de roteirização inteligente e gestão de entregas para operações que precisam organizar paradas, otimizar deslocamentos e executar entregas com precisão no dia a dia.\n\nO aplicativo reúne mapa operacional em tempo real, otimização de rotas, scanner de etiquetas com leitura on-device e importação de planilhas para montar rotas rapidamente — tudo pensado para reduzir retrabalho e ganhar visibilidade sobre a operação.\n\nIdeal para motoristas, entregadores e equipes de campo que precisam acompanhar paradas, registrar execução e tomar decisões operacionais com clareza, sem depender de ferramentas dispersas.",
+    shortDescription:
+      "Roteirização inteligente, mapa operacional e gestão de entregas para motoristas e entregadores.",
+    icon: "/images/apps/rotivy.png",
+    status: "em-breve",
+    href: "/aplicativos/rotivy",
+    hasLegalPages: true,
+    ogImage: "/images/apps/rotivy.png",
+    featureHighlights: [
+      "Roteirização inteligente com otimização da sequência de paradas para reduzir tempo e distância percorrida.",
+      "Mapa operacional em tempo real com GPS para visualizar rotas, paradas e execução no campo.",
+      "Scanner de etiquetas com leitura on-device (câmera e OCR) para cadastrar entregas com agilidade.",
+      "Gestão de entregas com controle de paradas, status e acompanhamento da execução em campo.",
+      "Importação de planilhas CSV e XLSX para montagem rápida de rotas com múltiplas paradas.",
+      "Painel operacional voltado a motoristas e entregadores que precisam de clareza na rotina diária.",
+    ],
   },
 ];

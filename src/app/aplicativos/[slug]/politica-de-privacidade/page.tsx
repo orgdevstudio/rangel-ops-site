@@ -4,19 +4,17 @@ import type { Metadata } from "next";
 import { apps } from "@/config/apps";
 import { Section, Container } from "@/components/ui";
 import { PrivacyCard } from "./PrivacyCard";
+import { appsWithLegalPages } from "@/lib/apps";
 import { PoliticaPrivacidadeCiviFlow } from "./PoliticaPrivacidadeCiviFlow";
 import { PoliticaPrivacidadeDriveFlow } from "./PoliticaPrivacidadeDriveFlow";
+import { PoliticaPrivacidadeRotivy } from "./PoliticaPrivacidadeRotivy";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
 }
 
 export function generateStaticParams() {
-  return [
-    { slug: "sellerflow" },
-    { slug: "driveflow" },
-    { slug: "civiflow" },
-  ];
+  return appsWithLegalPages.map((app) => ({ slug: app.slug }));
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
@@ -42,6 +40,13 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
         "Política de Privacidade do CiviFlow: Firebase, obras e custos, modo offline, minimização de dados e LGPD.",
     };
   }
+  if (slug === "rotivy") {
+    return {
+      title: "Política de Privacidade",
+      description:
+        "Política de Privacidade do Rotivy: GPS, câmera, scanner, rotas, entregas, Firebase e direitos LGPD.",
+    };
+  }
   return {};
 }
 
@@ -59,6 +64,10 @@ export default async function PoliticaPrivacidadePage({ params }: PageProps) {
 
   if (slug === "civiflow") {
     return <PoliticaPrivacidadeCiviFlow app={app} />;
+  }
+
+  if (slug === "rotivy") {
+    return <PoliticaPrivacidadeRotivy app={app} />;
   }
 
   if (slug !== "sellerflow") {

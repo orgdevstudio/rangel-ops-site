@@ -4,7 +4,8 @@ import type { Metadata } from "next";
 import { apps } from "@/config/apps";
 import { Section, Container } from "@/components/ui";
 import { Button } from "@/components/ui";
-import { AppIcon, StoreButtonsModal } from "@/components/apps";
+import { AppIcon, StoreButtonsModal, AppFeatureHighlightsCard } from "@/components/apps";
+import { getAppFeatureHighlights } from "@/lib/apps";
 
 interface AppPageProps {
   params: Promise<{ slug: string }>;
@@ -18,9 +19,19 @@ export async function generateMetadata({ params }: AppPageProps): Promise<Metada
   const { slug } = await params;
   const app = apps.find((a) => a.slug === slug);
   if (!app) return {};
+
+  const description = app.shortDescription ?? app.description;
+
   return {
     title: app.name,
-    description: app.shortDescription ?? app.description,
+    description,
+    ...(app.ogImage && {
+      openGraph: {
+        title: app.name,
+        description,
+        images: [{ url: app.ogImage, alt: app.name }],
+      },
+    }),
   };
 }
 
@@ -33,8 +44,7 @@ export default async function AppPage({ params }: AppPageProps) {
   }
 
   const paragraphs = app.description.split("\n\n").filter(Boolean);
-  const showAcesseLinks =
-    slug === "sellerflow" || slug === "driveflow" || slug === "civiflow";
+  const featureHighlights = getAppFeatureHighlights(app);
 
   return (
     <Section variant="default" background="default">
@@ -60,50 +70,12 @@ export default async function AppPage({ params }: AppPageProps) {
             ))}
           </div>
 
-          {slug === "civiflow" && (
-            <div
-              className="mt-10 rounded-2xl border border-white/[0.08] bg-white/[0.03] p-8 text-left backdrop-blur-sm sm:p-10"
-              style={{ boxShadow: "0 4px 24px -4px rgba(0,0,0,0.2)" }}
-            >
-              <p className="text-xs font-semibold uppercase tracking-[0.15em] text-[#94a3b8]/70">
-                Informações do app
-              </p>
-              <ul className="mt-5 space-y-4 text-sm text-[#94a3b8]/90 leading-[1.65]">
-                <li className="flex gap-3">
-                  <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-[#0EA5E9]" />
-                  <span>
-                    Visão integrada da obra: etapas, responsáveis e organização
-                    de tarefas para manter equipes e prazos alinhados ao
-                    planejamento.
-                  </span>
-                </li>
-                <li className="flex gap-3">
-                  <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-[#0EA5E9]" />
-                  <span>
-                    Controle de materiais com rastreio de entradas, saídas e
-                    saldo, reduzindo desperdício e falta de insumos no canteiro.
-                  </span>
-                </li>
-                <li className="flex gap-3">
-                  <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-[#0EA5E9]" />
-                  <span>
-                    Custos por fase e leitura de despesas frente ao orçamento,
-                    com apoio a decisões financeiras durante a construção.
-                  </span>
-                </li>
-                <li className="flex gap-3">
-                  <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-[#0EA5E9]" />
-                  <span>
-                    Acompanhamento de progresso físico da obra e indicadores de
-                    avanço para comparar execução com o que foi planejado.
-                  </span>
-                </li>
-              </ul>
-            </div>
+          {featureHighlights.length > 0 && (
+            <AppFeatureHighlightsCard highlights={featureHighlights} />
           )}
 
           <div className="mt-16 flex flex-col items-center gap-12">
-            {showAcesseLinks && (
+            {app.hasLegalPages && (
               <div className="flex flex-col items-center gap-4">
                 <p className="text-xs font-semibold uppercase tracking-[0.15em] text-[#94a3b8]/70">
                   Acesse

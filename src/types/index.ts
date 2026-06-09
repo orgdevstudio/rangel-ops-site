@@ -15,6 +15,12 @@ export interface App {
   googlePlayUrl?: string;
   appStoreUrl?: string;
   status?: "disponivel" | "em-breve" | "beta";
+  /** Exibe links para política de privacidade e exclusão de conta na página do app. */
+  hasLegalPages?: boolean;
+  /** Bullets exibidos no card "Informações do app" na página do aplicativo. */
+  featureHighlights?: string[];
+  /** Imagem Open Graph para a página principal do app (caminho público a partir de `/`). */
+  ogImage?: string;
 }
 
 /** Link de navegação */

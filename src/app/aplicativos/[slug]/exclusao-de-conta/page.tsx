@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { apps } from "@/config/apps";
+import { appsWithLegalPages } from "@/lib/apps";
 import {
   ExclusaoContaContent,
   type ExclusaoAppSlug,
@@ -10,11 +11,9 @@ interface PageProps {
   params: Promise<{ slug: string }>;
 }
 
-const ALLOWED_SLUGS: ExclusaoAppSlug[] = [
-  "sellerflow",
-  "driveflow",
-  "civiflow",
-];
+const ALLOWED_SLUGS = appsWithLegalPages.map(
+  (app) => app.slug
+) as ExclusaoAppSlug[];
 
 export function generateStaticParams() {
   return ALLOWED_SLUGS.map((slug) => ({ slug }));
@@ -41,6 +40,13 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       title: "Exclusão de conta e dados",
       description:
         "Exclusão permanente de conta CiviFlow: Firebase, obras, tarefas, materiais, registros financeiros e dados locais. LGPD e Google Play.",
+    };
+  }
+  if (slug === "rotivy") {
+    return {
+      title: "Exclusão de conta e dados",
+      description:
+        "Exclusão de conta Rotivy: Firebase, perfil, rotas locais, paradas e solicitação por formulário. LGPD e Google Play.",
     };
   }
   return {};
