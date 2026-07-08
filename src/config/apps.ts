@@ -71,4 +71,28 @@ export const apps: App[] = [
       "Painel operacional voltado a motoristas e entregadores que precisam de clareza na rotina diária.",
     ],
   },
+  {
+    id: "5",
+    name: "Price ML",
+    slug: "price-ml",
+    description:
+      "Price ML é uma calculadora inteligente de precificação desenvolvida para vendedores do Mercado Livre que precisam saber, com clareza e rapidez, quanto realmente lucram em cada venda e qual preço cobrar com margem profissional.\n\nO aplicativo reúne simulação em tempo real, cálculo automático das taxas do marketplace, modos Automático e Manual, margem desejada com preço recomendado, breakdown completo dos custos e um workspace para salvar e versionar decisões de precificação — tudo pensado para transformar um processo complexo em uma experiência simples, confiável e produtiva.\n\nIdeal para pequenos e médios empreendedores que vendem no Mercado Livre e querem precificar com inteligência, precisão e confiança, sem depender de planilhas ou cálculos manuais dispersos.",
+    shortDescription:
+      "Calculadora inteligente de precificação para vendedores do Mercado Livre.",
+    icon: "/images/apps/price-ml.png",
+    status: "em-breve",
+    href: "/aplicativos/price-ml",
+    hasLegalPages: true,
+    ogImage: "/images/apps/price-ml.png",
+    featureHighlights: [
+      "Simulação em tempo real com lucro, margem e ROI calculados enquanto você ajusta preço e custos.",
+      "Modo Automático com regras do Mercado Livre por categoria e tipo de anúncio (Clássico ou Premium).",
+      "Modo Manual com controle total de comissão (%) e taxa fixa (R$) para cenários personalizados.",
+      "Margem desejada com preço recomendado aplicável em um toque, para atingir sua meta de lucratividade.",
+      "Breakdown completo da composição de custos e do fluxo de dinheiro, da venda ao lucro líquido.",
+      "Análise da precificação com indicador de saúde da margem e orientações objetivas para decisão.",
+      "Workspace de produtos para salvar, versionar, filtrar e recalcular simulações com regras atualizadas.",
+      "Funciona offline após o login — simule e decida sem depender de conexão com a internet.",
+    ],
+  },
 ];

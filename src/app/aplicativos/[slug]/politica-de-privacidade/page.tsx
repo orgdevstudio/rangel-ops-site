@@ -8,6 +8,7 @@ import { appsWithLegalPages } from "@/lib/apps";
 import { PoliticaPrivacidadeCiviFlow } from "./PoliticaPrivacidadeCiviFlow";
 import { PoliticaPrivacidadeDriveFlow } from "./PoliticaPrivacidadeDriveFlow";
 import { PoliticaPrivacidadeRotivy } from "./PoliticaPrivacidadeRotivy";
+import { PoliticaPrivacidadePriceMl } from "./PoliticaPrivacidadePriceMl";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -47,6 +48,13 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
         "Política de Privacidade do Rotivy: GPS, câmera, scanner, rotas, entregas, Firebase e direitos LGPD.",
     };
   }
+  if (slug === "price-ml") {
+    return {
+      title: "Política de Privacidade",
+      description:
+        "Política de Privacidade do Price ML: precificação, simulações, Firebase, armazenamento local e direitos LGPD.",
+    };
+  }
   return {};
 }
 
@@ -68,6 +76,10 @@ export default async function PoliticaPrivacidadePage({ params }: PageProps) {
 
   if (slug === "rotivy") {
     return <PoliticaPrivacidadeRotivy app={app} />;
+  }
+
+  if (slug === "price-ml") {
+    return <PoliticaPrivacidadePriceMl app={app} />;
   }
 
   if (slug !== "sellerflow") {
