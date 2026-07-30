@@ -21,6 +21,16 @@ export interface App {
   featureHighlights?: string[];
   /** Imagem Open Graph para a página principal do app (caminho público a partir de `/`). */
   ogImage?: string;
+  /**
+   * Acesso Web para assinantes (mesma conta do app mobile).
+   * Quando definido, a página do app exibe o CTA "Já sou cliente" com modal de confirmação.
+   */
+  webAccess?: {
+    /** URL de login da versão Web (ex.: https://sellerflow.rangelops.com/login). */
+    loginUrl: string;
+    /** Label do botão CTA. Padrão: "Já sou cliente". */
+    label?: string;
+  };
 }
 
 /** Link de navegação */

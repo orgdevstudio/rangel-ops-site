@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { Dialog, Button } from "@/components/ui";
 
 const GooglePlayIcon = () => (
   <svg viewBox="0 0 24 24" className="h-8 w-8 shrink-0" fill="currentColor">
@@ -37,7 +38,6 @@ export function StoreButtonsModal({
     setSelectedStore(store);
     setIsOpen(true);
   };
-  const closeModal = () => setIsOpen(false);
 
   const handleGooglePlayClick = () => {
     if (googlePlayUrl) {
@@ -61,7 +61,12 @@ export function StoreButtonsModal({
         <button
           type="button"
           onClick={handleGooglePlayClick}
-          className="flex items-center gap-3 rounded-xl bg-[#1e293b] px-5 py-3.5 text-white transition-all duration-200 ease-out hover:bg-[#334155]"
+          aria-label={
+            googlePlayUrl
+              ? `Baixar ${appName} na Google Play`
+              : `${appName} na Google Play — disponível em breve`
+          }
+          className="flex items-center gap-3 rounded-xl bg-[#1e293b] px-5 py-3.5 text-white transition-all duration-200 ease-out hover:bg-[#334155] focus:outline-none focus:ring-2 focus:ring-[#0EA5E9] focus:ring-offset-2 focus:ring-offset-[#050B14]"
         >
           <GooglePlayIcon />
           <div className="text-left">
@@ -72,7 +77,12 @@ export function StoreButtonsModal({
         <button
           type="button"
           onClick={handleAppStoreClick}
-          className="flex items-center gap-3 rounded-xl bg-[#1e293b] px-5 py-3.5 text-white transition-all duration-200 ease-out hover:bg-[#334155]"
+          aria-label={
+            appStoreUrl
+              ? `Baixar ${appName} na App Store`
+              : `${appName} na App Store — disponível em breve`
+          }
+          className="flex items-center gap-3 rounded-xl bg-[#1e293b] px-5 py-3.5 text-white transition-all duration-200 ease-out hover:bg-[#334155] focus:outline-none focus:ring-2 focus:ring-[#0EA5E9] focus:ring-offset-2 focus:ring-offset-[#050B14]"
         >
           <AppleIcon />
           <div className="text-left">
@@ -82,36 +92,23 @@ export function StoreButtonsModal({
         </button>
       </div>
 
-      {isOpen && (
-        <>
-          <div
-            className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm"
-            onClick={closeModal}
-            aria-hidden
-          />
-          <div
-            className="fixed left-1/2 top-1/2 z-50 w-full max-w-md -translate-x-1/2 -translate-y-1/2 rounded-2xl border border-white/10 bg-[#0A1624] p-8 shadow-xl"
-            role="dialog"
-            aria-modal="true"
-            aria-labelledby="modal-title"
+      <Dialog
+        open={isOpen}
+        onOpenChange={setIsOpen}
+        title="Disponível em breve"
+        description={`O ${appName} ainda não está disponível na ${selectedStore}. Enquanto isso, entre em contato para saber mais.`}
+        footer={
+          <Button
+            type="button"
+            variant="primary"
+            size="md"
+            onClick={() => setIsOpen(false)}
+            className="w-full"
           >
-            <h2 id="modal-title" className="text-center text-xl font-bold text-white">
-              Disponível em breve
-            </h2>
-            <p className="mt-4 text-center text-[#94a3b8]/90">
-              O {appName} ainda não está disponível na {selectedStore}. Enquanto isso,
-              entre em contato para saber mais.
-            </p>
-            <button
-              type="button"
-              onClick={closeModal}
-              className="mt-8 w-full rounded-lg bg-[#0EA5E9] py-3 font-medium text-white transition-colors duration-200 ease-out hover:bg-[#0d9cd9]"
-            >
-              Entendi
-            </button>
-          </div>
-        </>
-      )}
+            Entendi
+          </Button>
+        }
+      />
     </>
   );
 }

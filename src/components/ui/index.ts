@@ -16,3 +16,7 @@ export {
   CardContent,
 } from "./Card";
 export type { CardProps } from "./Card";
+export { Dialog } from "./Dialog";
+export type { DialogProps } from "./Dialog";
+export { Badge } from "./Badge";
+export type { BadgeProps, BadgeVariant } from "./Badge";

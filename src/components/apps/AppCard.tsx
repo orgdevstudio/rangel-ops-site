@@ -1,6 +1,6 @@
 import Link from "next/link";
 import type { App } from "@/types";
-import { Card } from "@/components/ui";
+import { Card, Badge } from "@/components/ui";
 import { cn } from "@/lib/utils";
 import { AppIcon } from "./AppIcon";
 
@@ -13,15 +13,6 @@ const statusLabels = {
   disponivel: "Disponível",
   "em-breve": "Em breve",
   beta: "Beta",
-} as const;
-
-const statusStyles = {
-  disponivel:
-    "rounded-full bg-[#0EA5E9]/20 text-[#22D3EE] border border-[#0EA5E9]/30",
-  "em-breve":
-    "rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/30",
-  beta:
-    "rounded-full bg-[#0EA5E9]/20 text-[#22D3EE] border border-[#0EA5E9]/30",
 } as const;
 
 export function AppCard({ app, className }: AppCardProps) {
@@ -39,16 +30,16 @@ export function AppCard({ app, className }: AppCardProps) {
     >
       <div className="flex items-start justify-between gap-4">
         <AppIcon app={app} size="sm" />
-        {app.status && (
-          <span
-            className={cn(
-              "shrink-0 rounded-full px-3 py-1 text-xs font-medium",
-              statusStyles[status]
-            )}
-          >
-            {statusLabels[status]}
-          </span>
-        )}
+        <div className="flex shrink-0 flex-col items-end gap-1.5">
+          {app.status && (
+            <Badge variant={status}>{statusLabels[status]}</Badge>
+          )}
+          {app.webAccess && (
+            <Badge variant="accent" className="px-2.5 py-0.5 text-[11px] font-semibold tracking-wide">
+              Web
+            </Badge>
+          )}
+        </div>
       </div>
       <h3 className="mt-8 text-lg font-bold tracking-tight text-white leading-snug group-hover:text-[#0EA5E9] transition-colors duration-300 ease-out">
         {app.name}

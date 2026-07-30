@@ -10,14 +10,23 @@ export const apps: App[] = [
     name: "SellerFlow",
     slug: "sellerflow",
     description:
-      "SellerFlow é uma solução inteligente para vendedores que precisam controlar precificação, acompanhar fechamentos e consolidar resultados de vendas com precisão.\n\nO aplicativo permite calcular preços corretamente, organizar custos, analisar lucro líquido e visualizar o desempenho consolidado dos produtos de forma prática e estratégica.\n\nIdeal para quem vende em marketplaces (Shopee) e quer transformar dados em decisões mais lucrativas.",
+      "SellerFlow é uma solução inteligente para vendedores que precisam controlar precificação, acompanhar fechamentos e consolidar resultados de vendas com precisão.\n\nO aplicativo permite calcular preços corretamente, organizar custos, analisar lucro líquido e visualizar o desempenho consolidado dos produtos de forma prática e estratégica. Com a mesma conta do Android, a versão Web leva essa rotina para o computador — com sincronização automática entre os dispositivos.\n\nIdeal para quem vende em marketplaces (Shopee) e quer transformar dados em decisões mais lucrativas, no celular ou no desktop.",
     shortDescription:
-      "Solução inteligente para vendedores: precificação, fechamentos e resultados de vendas com precisão.",
+      "Precificação, fechamentos e resultados de vendas — no Android e no Web, com a mesma conta.",
     icon: "/images/apps/sellerflow.png",
     status: "disponivel",
     href: "/aplicativos/sellerflow",
     googlePlayUrl: "https://play.google.com/store/apps/details?id=com.sellerflow.app",
     hasLegalPages: true,
+    webAccess: {
+      loginUrl: "https://sellerflow.rangelops.com/login",
+    },
+    featureHighlights: [
+      "Precificação, custos e lucro líquido com clareza para cada produto e fechamento.",
+      "Assinatura com acesso Android e Web na mesma conta — continue de onde parou.",
+      "Sincronização automática entre celular e computador, sem retrabalho.",
+      "Produtividade no desktop para analisar, consolidar e decidir com mais conforto.",
+    ],
   },
   {
     id: "2",

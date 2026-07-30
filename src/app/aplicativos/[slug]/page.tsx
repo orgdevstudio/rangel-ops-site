@@ -2,9 +2,13 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import type { Metadata } from "next";
 import { apps } from "@/config/apps";
-import { Section, Container } from "@/components/ui";
-import { Button } from "@/components/ui";
-import { AppIcon, StoreButtonsModal, AppFeatureHighlightsCard } from "@/components/apps";
+import { Section, Container, Button, Badge } from "@/components/ui";
+import {
+  AppIcon,
+  StoreButtonsModal,
+  AppFeatureHighlightsCard,
+  ClientAccessCta,
+} from "@/components/apps";
 import { getAppFeatureHighlights } from "@/lib/apps";
 
 interface AppPageProps {
@@ -62,6 +66,11 @@ export default async function AppPage({ params }: AppPageProps) {
           <h1 className="mt-10 text-center text-4xl font-bold tracking-tight text-white sm:text-5xl lg:text-6xl leading-[1.2]">
             {app.name}
           </h1>
+          {app.webAccess && (
+            <div className="mt-5 flex justify-center">
+              <Badge variant="accent">Disponível também na Web</Badge>
+            </div>
+          )}
           <div className="mt-10 space-y-6 text-center">
             {paragraphs.map((para, i) => (
               <p key={i} className="text-base text-[#94a3b8]/90 leading-[1.65]">
@@ -109,6 +118,13 @@ export default async function AppPage({ params }: AppPageProps) {
                 appStoreUrl={app.appStoreUrl}
               />
             </div>
+            {app.webAccess && (
+              <ClientAccessCta
+                appName={app.name}
+                loginUrl={app.webAccess.loginUrl}
+                label={app.webAccess.label}
+              />
+            )}
             <Link href="/contato" className="inline-block">
               <Button variant="outline" className="border-[#0EA5E9] text-[#0EA5E9] hover:bg-[#0EA5E9]/10">
                 Fale conosco
