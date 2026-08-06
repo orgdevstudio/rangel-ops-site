@@ -14,17 +14,17 @@ export interface LogoProps {
   imageClassName?: string;
   /** Alt da imagem (default: brand.name) */
   alt?: string;
-  /** Largura da imagem (default: 280 para next/image) */
+  /** Largura da imagem (default: 120 para next/image) */
   width?: number;
-  /** Altura da imagem (default: 72) */
+  /** Altura da imagem (default: 96) */
   height?: number;
   /** Usar prioridade no carregamento (recomendado na navbar) */
   priority?: boolean;
 }
 
 /**
- * Logo reutilizável da marca.
- * Troque o arquivo em public/images/logo.svg (ou .png) sem alterar layout ou estilos.
+ * Logo reutilizável da marca (ícone R).
+ * Troque o arquivo em public/images/logo.png sem alterar layout ou estilos.
  * Se não houver imagem, exibe o nome da marca em texto.
  */
 export function Logo({
@@ -32,8 +32,8 @@ export function Logo({
   className,
   imageClassName,
   alt,
-  width = 280,
-  height = 72,
+  width = 120,
+  height = 96,
   priority = false,
 }: LogoProps) {
   const logo = siteConfig.brand.logo;
@@ -47,7 +47,10 @@ export function Logo({
       height={height}
       priority={priority}
       unoptimized
-      className={cn("h-16 w-auto object-contain object-left", imageClassName)}
+      className={cn(
+        "h-12 w-auto object-contain object-left drop-shadow-[0_0_10px_rgba(14,165,233,0.45)]",
+        imageClassName
+      )}
     />
   ) : (
     <span className="text-xl font-bold tracking-tight text-white transition-colors duration-300 ease-out hover:text-[#0EA5E9] lg:text-2xl">

@@ -1,10 +1,9 @@
 import {
   Hero,
   ProblemForWhom,
-  TrustProof,
-  EcosystemBrief,
+  SellerFlowFlagship,
   AppsPreview,
-  DiferenciaisCompact,
+  WhyRangelOps,
   HomeCTA,
 } from "@/components/sections";
 
@@ -13,10 +12,9 @@ export default function HomePage() {
     <>
       <Hero />
       <ProblemForWhom />
-      <TrustProof />
-      <EcosystemBrief />
+      <SellerFlowFlagship />
       <AppsPreview />
-      <DiferenciaisCompact />
+      <WhyRangelOps />
       <HomeCTA />
     </>
   );

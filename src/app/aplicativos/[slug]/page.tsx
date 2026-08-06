@@ -16,7 +16,9 @@ interface AppPageProps {
 }
 
 export async function generateStaticParams() {
-  return apps.map((app) => ({ slug: app.slug }));
+  return apps
+    .filter((app) => app.slug !== "sellerflow")
+    .map((app) => ({ slug: app.slug }));
 }
 
 export async function generateMetadata({ params }: AppPageProps): Promise<Metadata> {

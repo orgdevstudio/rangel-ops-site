@@ -13,10 +13,10 @@ export const siteConfig = {
       alt: "RangelOps",
     },
     /** Favicon: arquivo em app/favicon.ico (Next.js App Router) */
-    /** Imagem do card no Hero (tela inicial). Caminho: public/images/hero-image.png (ou .svg). Sem fundo (PNG/SVG transparente). Se omitir ou undefined, exibe "RO". */
+    /** Imagem do Hero (cena principal). Sem fundo/card — composição full-bleed. */
     heroImage: {
-      src: "/images/hero-image.png",
-      alt: "RangelOps",
+      src: "/images/hero-ecosystem-v1.png",
+      alt: "Ecossistema RangelOps em notebook, tablet e smartphone com dashboards conectados",
     },
     tagline: "Soluções digitais para operações que crescem",
     description:
@@ -26,7 +26,7 @@ export const siteConfig = {
   /** Metadados para SEO */
   metadata: {
     title: {
-      default: "RangelOps | Soluções Digitais para Operações que Escalam",
+      default: "RangelOps | Soluções Digitais",
       template: "%s | RangelOps",
     },
     description:
@@ -67,14 +67,6 @@ export const siteConfig = {
       { label: "Termos de Uso", href: "/legal/termos" },
       { label: "Política de Privacidade", href: "/legal/privacidade" },
     ],
-  },
-
-  /** Redes sociais */
-  social: {
-    linkedin: "https://linkedin.com/company/rangelops",
-    twitter: "https://twitter.com/rangelops",
-    github: "https://github.com/rangelops",
-    instagram: "https://instagram.com/rangelops",
   },
 
   /** URLs importantes */

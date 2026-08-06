@@ -15,6 +15,8 @@ export interface App {
   googlePlayUrl?: string;
   appStoreUrl?: string;
   status?: "disponivel" | "em-breve" | "beta";
+  /** Se false, some dos grids; a URL direta continua válida. Default: true. */
+  listed?: boolean;
   /** Exibe links para política de privacidade e exclusão de conta na página do app. */
   hasLegalPages?: boolean;
   /** Bullets exibidos no card "Informações do app" na página do aplicativo. */

@@ -1,6 +1,6 @@
 import { Section, Container } from "@/components/ui";
 import { AppCard } from "@/components/apps";
-import { apps } from "@/config/apps";
+import { listedApps } from "@/lib/apps";
 
 export interface AppsGridProps {
   title?: string;
@@ -25,7 +25,7 @@ export function AppsGrid({
         </div>
 
         <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-12 lg:gap-8">
-          {apps.map((app) => (
+          {listedApps.map((app) => (
             <div key={app.id} className="lg:col-span-4">
               <AppCard app={app} />
             </div>

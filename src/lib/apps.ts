@@ -1,6 +1,9 @@
 import { apps } from "@/config/apps";
 import type { App } from "@/types";
 
+/** Apps visíveis em grids e catálogo. URLs diretas de apps ocultos continuam válidas. */
+export const listedApps = apps.filter((app) => app.listed !== false);
+
 export const appsWithLegalPages = apps.filter((app) => app.hasLegalPages);
 
 export function appHasLegalPages(slug: string): boolean {

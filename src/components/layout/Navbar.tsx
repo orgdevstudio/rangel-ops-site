@@ -14,9 +14,9 @@ export function Navbar() {
   return (
     <header className="sticky top-0 z-50 w-full border-b border-white/10 bg-[#050B14]/95 backdrop-blur supports-[backdrop-filter]:bg-[#050B14]/80">
       <Container size="xl">
-        <nav className="flex h-24 items-center justify-between lg:h-32">
+        <nav className="flex h-16 items-center justify-between lg:h-20">
           {/* Logo */}
-          <Logo href="/" priority imageClassName="h-24 w-auto lg:h-32 hover:opacity-90 transition-opacity" />
+          <Logo href="/" priority imageClassName="h-12 w-auto lg:h-14 hover:opacity-90 transition-opacity" />
 
           {/* Desktop navigation */}
           <div className="hidden items-center gap-8 md:flex">

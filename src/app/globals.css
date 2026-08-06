@@ -9,6 +9,7 @@
   --foreground-muted: #94a3b8;
   /* Microinterações */
   --ease-out: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --ease-spring: cubic-bezier(0.22, 1, 0.36, 1);
   --duration-fast: 200ms;
   --duration-normal: 280ms;
   /* Escala tipográfica: H1 hero dominante, H2 forte com respiro, H3 cards, body leitura confortável */
@@ -60,6 +61,104 @@ body {
 
 .animate-page-enter {
   animation: page-enter 0.35s var(--ease-out) forwards;
+}
+
+/* —— Hero cena viva —— */
+@keyframes hero-float {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, -12px, 0);
+  }
+}
+
+@keyframes hero-glow-pulse {
+  0%,
+  100% {
+    opacity: 0.28;
+  }
+  50% {
+    opacity: 0.42;
+  }
+}
+
+@keyframes hero-energy-flow {
+  to {
+    stroke-dashoffset: -220;
+  }
+}
+
+@keyframes hero-particle-drift {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+    opacity: 0.15;
+  }
+  50% {
+    transform: translate3d(4px, -10px, 0);
+    opacity: 0.45;
+  }
+}
+
+@keyframes hero-holo-breathe {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.02);
+  }
+}
+
+.hero-float {
+  animation: hero-float 7.5s ease-in-out infinite;
+  will-change: transform;
+}
+
+.hero-glow-pulse {
+  animation: hero-glow-pulse 10s ease-in-out infinite;
+  will-change: opacity;
+}
+
+.hero-energy-line {
+  stroke-dasharray: 8 14;
+  animation: hero-energy-flow 18s linear infinite;
+  will-change: stroke-dashoffset;
+}
+
+.hero-particle {
+  animation: hero-particle-drift 11s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+
+.hero-holo-breathe {
+  animation: hero-holo-breathe 8s ease-in-out infinite;
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .animate-page-enter {
+    animation: none;
+  }
+
+  .motion-reduce\:opacity-100 {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .hero-float,
+  .hero-glow-pulse,
+  .hero-energy-line,
+  .hero-particle,
+  .hero-holo-breathe {
+    animation: none !important;
+  }
 }
 
 /* Largura máxima para blocos de texto: leitura confortável */

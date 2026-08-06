@@ -1,0 +1,12 @@
+export { SellerFlowHero } from "./SellerFlowHero";
+export { SellerFlowPageHeader } from "./SellerFlowPageHeader";
+export { SellerFlowDifferentiators } from "./SellerFlowDifferentiators";
+export { SellerFlowProblem } from "./SellerFlowProblem";
+export { SellerFlowSolution } from "./SellerFlowSolution";
+export { SellerFlowProductShowcase } from "./SellerFlowProductShowcase";
+export { SellerFlowHowItWorks } from "./SellerFlowHowItWorks";
+export { SellerFlowPlans } from "./SellerFlowPlans";
+export { SellerFlowFaq } from "./SellerFlowFaq";
+export { SellerFlowInstagram } from "./SellerFlowInstagram";
+export { SellerFlowFinalCta } from "./SellerFlowFinalCta";
+export { SellerFlowClientAccess } from "./SellerFlowClientAccess";

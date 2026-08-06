@@ -12,12 +12,13 @@ export const apps: App[] = [
     description:
       "SellerFlow é uma solução inteligente para vendedores que precisam controlar precificação, acompanhar fechamentos e consolidar resultados de vendas com precisão.\n\nO aplicativo permite calcular preços corretamente, organizar custos, analisar lucro líquido e visualizar o desempenho consolidado dos produtos de forma prática e estratégica. Com a mesma conta do Android, a versão Web leva essa rotina para o computador — com sincronização automática entre os dispositivos.\n\nIdeal para quem vende em marketplaces (Shopee) e quer transformar dados em decisões mais lucrativas, no celular ou no desktop.",
     shortDescription:
-      "Precificação, fechamentos e resultados de vendas — no Android e no Web, com a mesma conta.",
+      "Precifique, acompanhe resultados e feche períodos com uma única conta entre Android e ERP Web.",
     icon: "/images/apps/sellerflow.png",
     status: "disponivel",
     href: "/aplicativos/sellerflow",
     googlePlayUrl: "https://play.google.com/store/apps/details?id=com.sellerflow.app",
     hasLegalPages: true,
+    ogImage: "/images/apps/sellerflow/hero-productivity.png",
     webAccess: {
       loginUrl: "https://sellerflow.rangelops.com/login",
     },
@@ -37,6 +38,7 @@ export const apps: App[] = [
     shortDescription:
       "Gestão de obras: tarefas, materiais, custos e progresso da construção em um só lugar.",
     status: "em-breve",
+    listed: false,
     href: "/aplicativos/civiflow",
     hasLegalPages: true,
     featureHighlights: [
@@ -54,6 +56,7 @@ export const apps: App[] = [
       "DriveFlow é o aplicativo da Rangel Ops voltado a motoristas que atuam em plataformas de transporte por aplicativo. O foco é apoiar decisões financeiras com cálculos e leitura de lucro no contexto de cada corrida.\n\nO app reúne indicadores e simulações para que o motorista compreenda, de forma objetiva, o retorno esperado antes e durante o trabalho nas ruas.\n\nQuando a corrida é tocada ou aceita, o DriveFlow verifica se a oferta é favorável ou desfavorável conforme regras e parâmetros definidos pelo próprio motorista. A análise gera uma conclusão rápida e clara, exibida na tela para orientar a decisão com segurança e transparência.",
     shortDescription:
       "Cálculos e lucro para motoristas de aplicativo: análise rápida de cada corrida antes de você seguir.",
+    icon: "/images/apps/driveflow.png",
     status: "em-breve",
     href: "/aplicativos/driveflow",
     hasLegalPages: true,
@@ -68,6 +71,7 @@ export const apps: App[] = [
       "Roteirização inteligente, mapa operacional e gestão de entregas para motoristas e entregadores.",
     icon: "/images/apps/rotivy.png",
     status: "em-breve",
+    listed: false,
     href: "/aplicativos/rotivy",
     hasLegalPages: true,
     ogImage: "/images/apps/rotivy.png",
