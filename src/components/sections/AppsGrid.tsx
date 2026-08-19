@@ -13,7 +13,7 @@ export function AppsGrid({
 }: AppsGridProps) {
   return (
     <Section variant="default" background="default">
-      <Container size="xl">
+      <Container size="full" className="max-w-7xl">
         <div className="text-center mx-auto max-w-3xl mt-16 mb-24 lg:mb-32">
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#94a3b8]/75">
             Ecossistema SaaS
@@ -24,7 +24,7 @@ export function AppsGrid({
           <p className="mt-6 text-base text-[#94a3b8]/70 max-w-2xl mx-auto leading-[1.65]">{subtitle}</p>
         </div>
 
-        <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-12 lg:gap-8">
+        <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-12 lg:gap-10">
           {listedApps.map((app) => (
             <div key={app.id} className="lg:col-span-4">
               <AppCard app={app} />

@@ -18,13 +18,13 @@ const statusLabels = {
 function PlatformSyncStrip() {
   return (
     <div
-      className="mt-5 rounded-xl border border-[#0EA5E9]/30 bg-[rgba(14,165,233,0.06)] px-3 py-3 sm:px-4"
+      className="mt-5 rounded-xl border border-[#0EA5E9]/30 bg-[rgba(14,165,233,0.06)] px-3 py-3"
       aria-label="Android e ERP Web sincronizados"
     >
-      <div className="flex flex-col items-stretch gap-3 sm:flex-row sm:items-center sm:justify-between sm:gap-2">
-        <div className="flex min-w-0 flex-1 items-center gap-2.5">
-          <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-[#0EA5E9]/35 text-[#22D3EE]">
-            <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden>
+      <div className="grid grid-cols-[1fr_auto_1fr] items-center gap-2">
+        <div className="flex flex-col items-center gap-1.5 text-center">
+          <span className="flex h-8 w-8 items-center justify-center rounded-full border border-[#0EA5E9]/35 text-[#22D3EE]">
+            <svg className="h-3.5 w-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden>
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
@@ -33,17 +33,14 @@ function PlatformSyncStrip() {
               />
             </svg>
           </span>
-          <div className="min-w-0">
-            <p className="text-sm font-semibold tracking-tight text-white">Android</p>
-            <p className="text-[11px] leading-tight text-[#94a3b8]/80">App mobile</p>
+          <div>
+            <p className="text-xs font-semibold tracking-tight text-white">Android</p>
+            <p className="mt-0.5 text-[11px] leading-tight text-[#94a3b8]/80">App mobile</p>
           </div>
         </div>
 
-        <span
-          className="flex shrink-0 items-center justify-center text-[#0EA5E9] sm:px-1"
-          aria-hidden
-        >
-          <svg className="h-5 w-5 rotate-90 sm:rotate-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <span className="flex items-center justify-center text-[#0EA5E9]" aria-hidden>
+          <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path
               strokeLinecap="round"
               strokeLinejoin="round"
@@ -53,9 +50,9 @@ function PlatformSyncStrip() {
           </svg>
         </span>
 
-        <div className="flex min-w-0 flex-1 items-center gap-2.5 sm:justify-end">
-          <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-[#0EA5E9]/35 text-[#22D3EE]">
-            <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden>
+        <div className="flex flex-col items-center gap-1.5 text-center">
+          <span className="flex h-8 w-8 items-center justify-center rounded-full border border-[#0EA5E9]/35 text-[#22D3EE]">
+            <svg className="h-3.5 w-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden>
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
@@ -64,9 +61,9 @@ function PlatformSyncStrip() {
               />
             </svg>
           </span>
-          <div className="min-w-0">
-            <p className="text-sm font-semibold tracking-tight text-white">ERP Web</p>
-            <p className="text-[11px] leading-tight text-[#94a3b8]/80">Plataforma Web</p>
+          <div>
+            <p className="text-xs font-semibold tracking-tight text-white">ERP Web</p>
+            <p className="mt-0.5 text-[11px] leading-tight text-[#94a3b8]/80">Plataforma Web</p>
           </div>
         </div>
       </div>
@@ -82,7 +79,7 @@ export function AppCard({ app, className }: AppCardProps) {
     <Card
       variant="elevated"
       className={cn(
-        "h-full flex flex-col transition-all duration-300 ease-out",
+        "h-full flex flex-col overflow-hidden transition-all duration-300 ease-out",
         isClickable && "cursor-pointer group",
         className
       )}
@@ -123,7 +120,7 @@ export function AppCard({ app, className }: AppCardProps) {
 
   if (isClickable && app.href) {
     return (
-      <Link href={app.href} className="block h-full">
+      <Link href={app.href} className="block h-full min-w-0 w-full">
         {content}
       </Link>
     );

@@ -53,13 +53,21 @@ export const apps: App[] = [
     name: "DriveFlow",
     slug: "driveflow",
     description:
-      "DriveFlow é o aplicativo da Rangel Ops voltado a motoristas que atuam em plataformas de transporte por aplicativo. O foco é apoiar decisões financeiras com cálculos e leitura de lucro no contexto de cada corrida.\n\nO app reúne indicadores e simulações para que o motorista compreenda, de forma objetiva, o retorno esperado antes e durante o trabalho nas ruas.\n\nQuando a corrida é tocada ou aceita, o DriveFlow verifica se a oferta é favorável ou desfavorável conforme regras e parâmetros definidos pelo próprio motorista. A análise gera uma conclusão rápida e clara, exibida na tela para orientar a decisão com segurança e transparência.",
+      "DriveFlow é o aplicativo Android para motoristas de Uber e 99 que precisam decidir melhor antes de aceitar uma corrida.\n\nQuando a oferta aparece, o DriveFlow analisa valor, distância e tempo e mostra se vale a pena — de acordo com os ganhos que você mesmo definiu.\n\nDepois da jornada, você registra o dia no Fechamento: lucro, faturamento, gastos, metas e histórico, no seu ritmo.",
     shortDescription:
-      "Cálculos e lucro para motoristas de aplicativo: análise rápida de cada corrida antes de você seguir.",
+      "Decida melhor antes de aceitar uma corrida. O DriveFlow analisa a oferta e mostra se vale a pena — com os seus critérios.",
     icon: "/images/apps/driveflow.png",
-    status: "em-breve",
+    status: "disponivel",
     href: "/aplicativos/driveflow",
+    googlePlayUrl: "https://play.google.com/store/apps/details?id=com.rangel.driveflow",
     hasLegalPages: true,
+    ogImage: "/images/apps/driveflow/hero-driver.png",
+    featureHighlights: [
+      "A oferta aparece, o DriveFlow analisa e você decide com números claros — antes de aceitar.",
+      "Você define o que vale a pena: ganho por km, por hora, por minuto e valor mínimo.",
+      "Indicador na tela sobre Uber e 99, com vale a pena, avaliar ou não vale a pena.",
+      "Fechamento do Dia, metas e histórico para acompanhar a jornada depois das corridas.",
+    ],
   },
   {
     id: "4",
