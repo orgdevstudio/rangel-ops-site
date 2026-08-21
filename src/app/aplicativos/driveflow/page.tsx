@@ -9,6 +9,7 @@ import {
   DriveFlowCriteria,
   DriveFlowProductShowcase,
   DriveFlowFaq,
+  DriveFlowInstagram,
   DriveFlowFinalCta,
 } from "@/components/apps/driveflow";
 
@@ -41,6 +42,7 @@ export default function DriveFlowLandingPage() {
       <DriveFlowCriteria />
       <DriveFlowProductShowcase />
       <DriveFlowFaq />
+      <DriveFlowInstagram />
       <DriveFlowFinalCta googlePlayUrl={googlePlayUrl} />
     </>
   );

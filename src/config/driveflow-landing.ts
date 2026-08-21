@@ -194,6 +194,15 @@ export const driveflowLanding = {
     ],
   },
 
+  instagram: {
+    url: "https://www.instagram.com/driveflowbr/",
+    eyebrow: "Comunidade",
+    title: "Acompanhe o DriveFlow de perto",
+    subtitle: "Novidades e dicas para a jornada em",
+    handle: "@driveflowbr",
+    ctaLabel: "Seguir no Instagram",
+  },
+
   finalCta: {
     title: "Pronto para decidir melhor?",
     subtitle: "Baixe o DriveFlow e veja se a corrida vale a pena antes de aceitar.",

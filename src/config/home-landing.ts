@@ -35,12 +35,22 @@ export const homeLanding = {
 
   flagship: {
     eyebrow: "Disponível agora",
-    title: "SellerFlow — precificação e lucro na Shopee",
-    subtitle:
-      "Calcule o que realmente sobra em cada venda. Android + ERP Web, mesma conta — do celular ao desktop sem retrabalho.",
-    primaryCta: "Conhecer SellerFlow",
-    primaryHref: "/aplicativos/sellerflow",
-    secondaryCta: "Baixar na Google Play",
+    sellerflow: {
+      title: "SellerFlow — precificação e lucro na Shopee",
+      subtitle:
+        "Calcule o que realmente sobra em cada venda. Android + ERP Web, mesma conta — do celular ao desktop sem retrabalho.",
+      primaryCta: "Conhecer SellerFlow",
+      primaryHref: "/aplicativos/sellerflow",
+      secondaryCta: "Baixar na Google Play",
+    },
+    driveflow: {
+      title: "DriveFlow — decida melhor antes de aceitar a corrida",
+      subtitle:
+        "A oferta aparece. O DriveFlow analisa e mostra se vale a pena — com os seus critérios.",
+      primaryCta: "Conhecer DriveFlow",
+      primaryHref: "/aplicativos/driveflow",
+      secondaryCta: "Baixar na Google Play",
+    },
   },
 
   apps: {

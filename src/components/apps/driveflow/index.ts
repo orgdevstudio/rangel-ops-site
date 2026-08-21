@@ -5,4 +5,5 @@ export { DriveFlowTransformation } from "./DriveFlowTransformation";
 export { DriveFlowCriteria } from "./DriveFlowCriteria";
 export { DriveFlowProductShowcase } from "./DriveFlowProductShowcase";
 export { DriveFlowFaq } from "./DriveFlowFaq";
+export { DriveFlowInstagram } from "./DriveFlowInstagram";
 export { DriveFlowFinalCta } from "./DriveFlowFinalCta";
