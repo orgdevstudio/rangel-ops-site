@@ -189,7 +189,12 @@ export const driveflowLanding = {
       {
         question: "Funciona em Xiaomi, Redmi, POCO e Samsung?",
         answer:
-          "Sim, o DriveFlow é feito para Android. Em Xiaomi, Redmi, POCO e Realme, o sistema costuma limitar apps em segundo plano — pode ser preciso liberar início automático e bateria sem restrições. No app, o guia Prepare seu aparelho mostra o caminho. Em Samsung, em geral não precisa desse passo extra.",
+          "Sim, o DriveFlow é feito para Android. Em Xiaomi, Redmi, POCO e Realme, o sistema costuma limitar apps em segundo plano — pode ser preciso liberar início automático e bateria sem restrições. No app, o guia Prepare seu aparelho mostra o caminho. Em Samsung, em geral não precisa desse passo extra. O vídeo abaixo mostra como configurar no Xiaomi.",
+        video: {
+          title: "Veja como configurar seu Xiaomi",
+          youtubeId: "xP0NOQ-H84k",
+          watchUrl: "https://youtube.com/shorts/xP0NOQ-H84k?feature=share",
+        },
       },
     ],
   },

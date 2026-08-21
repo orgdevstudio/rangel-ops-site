@@ -3,6 +3,7 @@
 import { useId, useState } from "react";
 import { Section, Container, SectionReveal } from "@/components/ui";
 import { driveflowLanding } from "@/config/driveflow-landing";
+import { DriveFlowFaqVideo } from "./DriveFlowFaqVideo";
 import { cn } from "@/lib/utils";
 
 export function DriveFlowFaq() {
@@ -65,9 +66,19 @@ export function DriveFlowFaq() {
                     hidden={!isOpen}
                     className={cn(!isOpen && "hidden")}
                   >
-                    <p className="border-t border-white/[0.06] px-5 pb-5 pt-4 text-sm leading-[1.65] text-[#94a3b8]/85 sm:px-6 sm:pb-6">
-                      {item.answer}
-                    </p>
+                    <div className="border-t border-white/[0.06] px-5 pb-5 pt-4 sm:px-6 sm:pb-6">
+                      <p className="text-sm leading-[1.65] text-[#94a3b8]/85">
+                        {item.answer}
+                      </p>
+                      {isOpen && "video" in item && item.video && (
+                        <DriveFlowFaqVideo
+                          title={item.video.title}
+                          youtubeId={item.video.youtubeId}
+                          watchUrl={item.video.watchUrl}
+                          active={isOpen}
+                        />
+                      )}
+                    </div>
                   </div>
                 </div>
               );
