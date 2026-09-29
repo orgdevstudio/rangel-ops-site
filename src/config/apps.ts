@@ -116,4 +116,26 @@ export const apps: App[] = [
       "Funciona offline após o login — simule e decida sem depender de conexão com a internet.",
     ],
   },
+  {
+    id: "6",
+    name: "BiliUp",
+    slug: "biliup",
+    description:
+      "BiliUp é um aplicativo premium de aprendizado de idiomas baseado em missões do dia a dia. Em vez de estudar listas isoladas, você aprende fazendo: pedir um café, se apresentar, fazer compras ou pegar um transporte — em situações reais, com lições curtas e feedback imediato.\n\nA jornada é organizada por níveis e temas. Cada missão combina vocabulário, escuta, montagem de frases, compreensão e conversas contextualizadas, com apoio de tradução quando você precisa e progresso claro do que já consegue fazer.\n\nIdeal para quem quer usar o idioma de verdade, em sessões práticas no celular — com uma experiência visual, leve e motivadora.",
+    shortDescription:
+      "Aprenda idiomas por missões do dia a dia — situações reais, lições curtas e progresso claro.",
+    icon: "/images/apps/biliup.png",
+    status: "em-breve",
+    href: "/aplicativos/biliup",
+    hasLegalPages: true,
+    ogImage: "/images/apps/biliup/og.png",
+    featureHighlights: [
+      "Missões baseadas em situações reais: saudações, café, restaurante, compras e transporte.",
+      "Lições curtas com vocabulário, associação por imagens, escuta, montagem de frases e conversação.",
+      "Jornada organizada por níveis, com progresso e domínio perceptíveis a cada missão.",
+      "Cursos de inglês, espanhol, francês, alemão, português e hindi — com interface em vários idiomas.",
+      "Tradução de apoio e dicas quando você trava, sem tirar o foco de usar o idioma.",
+      "Feedback imediato, microinterações e uma experiência premium pensada para aprender rápido.",
+    ],
+  },
 ];

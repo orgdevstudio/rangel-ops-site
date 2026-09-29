@@ -17,7 +17,12 @@ interface AppPageProps {
 
 export async function generateStaticParams() {
   return apps
-    .filter((app) => app.slug !== "sellerflow" && app.slug !== "driveflow")
+    .filter(
+      (app) =>
+        app.slug !== "sellerflow" &&
+        app.slug !== "driveflow" &&
+        app.slug !== "biliup"
+    )
     .map((app) => ({ slug: app.slug }));
 }
 

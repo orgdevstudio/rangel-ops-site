@@ -1,0 +1,10 @@
+export { BiliUpPageHeader } from "./BiliUpPageHeader";
+export { BiliUpHero } from "./BiliUpHero";
+export { BiliUpProblem } from "./BiliUpProblem";
+export { BiliUpTransformation } from "./BiliUpTransformation";
+export { BiliUpLanguages } from "./BiliUpLanguages";
+export { BiliUpHowItWorks } from "./BiliUpHowItWorks";
+export { BiliUpProductShowcase } from "./BiliUpProductShowcase";
+export { BiliUpFeatures } from "./BiliUpFeatures";
+export { BiliUpFaq } from "./BiliUpFaq";
+export { BiliUpFinalCta } from "./BiliUpFinalCta";

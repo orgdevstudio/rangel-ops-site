@@ -5,3 +5,7 @@ export { sellerflowLanding } from "./sellerflow-landing";
 export type { SellerflowLanding } from "./sellerflow-landing";
 export { sellerflowMedia } from "./sellerflow-media";
 export type { SellerflowMedia, SellerflowMediaAsset } from "./sellerflow-media";
+export { biliupLanding } from "./biliup-landing";
+export type { BiliupLanding } from "./biliup-landing";
+export { biliupMedia } from "./biliup-media";
+export type { BiliupMedia, BiliupMediaAsset } from "./biliup-media";

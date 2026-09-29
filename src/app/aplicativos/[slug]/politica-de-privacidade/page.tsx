@@ -9,6 +9,7 @@ import { PoliticaPrivacidadeCiviFlow } from "./PoliticaPrivacidadeCiviFlow";
 import { PoliticaPrivacidadeDriveFlow } from "./PoliticaPrivacidadeDriveFlow";
 import { PoliticaPrivacidadeRotivy } from "./PoliticaPrivacidadeRotivy";
 import { PoliticaPrivacidadePriceMl } from "./PoliticaPrivacidadePriceMl";
+import { PoliticaPrivacidadeBiliUp } from "./PoliticaPrivacidadeBiliUp";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -55,6 +56,13 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
         "Política de Privacidade do Price ML: precificação, simulações, Firebase, armazenamento local e direitos LGPD.",
     };
   }
+  if (slug === "biliup") {
+    return {
+      title: "Política de Privacidade",
+      description:
+        "Política de Privacidade do BiliUp: conta, progresso de missões, Firebase, modo visitante e direitos LGPD.",
+    };
+  }
   return {};
 }
 
@@ -80,6 +88,10 @@ export default async function PoliticaPrivacidadePage({ params }: PageProps) {
 
   if (slug === "price-ml") {
     return <PoliticaPrivacidadePriceMl app={app} />;
+  }
+
+  if (slug === "biliup") {
+    return <PoliticaPrivacidadeBiliUp app={app} />;
   }
 
   if (slug !== "sellerflow") {

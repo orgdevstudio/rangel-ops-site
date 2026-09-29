@@ -56,6 +56,13 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
         "Exclusão de conta Price ML: Firebase, perfil, parâmetros, simulações locais e solicitação por formulário. LGPD e Google Play.",
     };
   }
+  if (slug === "biliup") {
+    return {
+      title: "Exclusão de conta e dados",
+      description:
+        "Exclusão de conta BiliUp: Firebase, perfil, progresso de missões, dias de estudo e solicitação por formulário. LGPD.",
+    };
+  }
   return {};
 }
 

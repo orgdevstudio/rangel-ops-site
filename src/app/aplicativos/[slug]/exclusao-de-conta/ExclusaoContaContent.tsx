@@ -13,7 +13,13 @@ type FormErrors = {
   submit?: string;
 };
 
-export type ExclusaoAppSlug = "sellerflow" | "driveflow" | "civiflow" | "rotivy" | "price-ml";
+export type ExclusaoAppSlug =
+  | "sellerflow"
+  | "driveflow"
+  | "civiflow"
+  | "rotivy"
+  | "price-ml"
+  | "biliup";
 
 const APP_NAMES: Record<ExclusaoAppSlug, string> = {
   sellerflow: "SellerFlow",
@@ -21,6 +27,7 @@ const APP_NAMES: Record<ExclusaoAppSlug, string> = {
   civiflow: "CiviFlow",
   rotivy: "Rotivy",
   "price-ml": "Price ML",
+  biliup: "BiliUp",
 };
 
 const REQUEST_TYPE_LABELS = {
@@ -302,6 +309,15 @@ export function ExclusaoContaContent({ slug }: { slug: ExclusaoAppSlug }) {
                   precisa ser apagado por você com limpeza local ou desinstalação,
                   como explicamos nas seções abaixo.
                 </>
+              ) : slug === "biliup" ? (
+                <>
+                  O BiliUp segue a LGPD e as exigências das lojas de aplicativos.
+                  Você pode excluir a conta e os dados tratados em nossos
+                  sistemas. A conta utiliza Firebase para autenticação, perfil e
+                  progresso de aprendizado (missões, dias de estudo e respostas).
+                  Cópias offline e sessão no aparelho podem exigir limpeza
+                  local, como detalhamos abaixo.
+                </>
               ) : (
                 <>
                   O {appName} está em conformidade com a Lei Geral de Proteção
@@ -382,6 +398,15 @@ export function ExclusaoContaContent({ slug }: { slug: ExclusaoAppSlug }) {
                         a versão em uso. Confirme somente se deseja apagar tudo de
                         forma irreversível na nuvem.
                       </>
+                    ) : slug === "biliup" ? (
+                      <>
+                        Com o BiliUp instalado e acesso à sua conta, você pode
+                        excluir a conta em Dados pessoais. O processo pede
+                        confirmação (senha ou conta Google, conforme o tipo de
+                        login), remove o progresso de missões, os dias de estudo,
+                        o perfil e a credencial no Firebase. Confirme somente se
+                        deseja apagar tudo de forma irreversível.
+                      </>
                     ) : (
                       <>
                         Se você possui acesso ao SellerFlow instalado no seu
@@ -431,6 +456,16 @@ export function ExclusaoContaContent({ slug }: { slug: ExclusaoAppSlug }) {
                       ou desinstale o aplicativo.
                     </p>
                   )}
+                  {slug === "biliup" && (
+                    <p className="mt-4 text-base text-[#94a3b8]/90 leading-[1.75]">
+                      Depois de confirmar a exclusão na nuvem, se ainda houver
+                      sessão ou cópia offline no celular, apague com{" "}
+                      <strong className="font-medium text-white/90">
+                        Configurações do Android → Apps → BiliUp → Limpar dados
+                      </strong>{" "}
+                      ou desinstale o aplicativo.
+                    </p>
+                  )}
                   <h3 className="mt-6 text-base font-semibold text-white">
                     {slug === "rotivy" || slug === "price-ml"
                       ? "Passos para limpar dados locais no app"
@@ -441,9 +476,11 @@ export function ExclusaoContaContent({ slug }: { slug: ExclusaoAppSlug }) {
                     <li>
                       {slug === "rotivy" || slug === "price-ml"
                         ? "Acesse o perfil ou a área da sua conta"
-                        : slug === "driveflow" || slug === "civiflow"
-                          ? "Abra as configurações ou a área da sua conta / perfil"
-                          : "Acesse o menu de configurações ou perfil"}
+                        : slug === "biliup"
+                          ? "Abra o Perfil e acesse Dados pessoais"
+                          : slug === "driveflow" || slug === "civiflow"
+                            ? "Abra as configurações ou a área da sua conta / perfil"
+                            : "Acesse o menu de configurações ou perfil"}
                     </li>
                     {slug === "rotivy" || slug === "price-ml" ? (
                       <>
@@ -720,6 +757,58 @@ export function ExclusaoContaContent({ slug }: { slug: ExclusaoAppSlug }) {
                         app antigo, repita a limpeza lá também.
                       </p>
                     </>
+                  ) : slug === "biliup" ? (
+                    <>
+                      <p className="mt-4 text-base text-[#94a3b8]/90 leading-[1.75]">
+                        A exclusão da conta afeta de forma distinta o que está na
+                        nuvem e o que está só no seu celular. Tratamos o pedido
+                        com base na LGPD e no direito à eliminação dos dados
+                        quando aplicável.
+                      </p>
+                      <h3 className="mt-6 text-base font-semibold text-white">
+                        Na nuvem (Firebase e serviços associados)
+                      </h3>
+                      <p className="mt-3 text-base text-[#94a3b8]/90 leading-[1.75]">
+                        Ao excluir a conta pelo app ou pelo suporte, buscamos
+                        remover ou anonimizar, nos sistemas que controlamos:
+                      </p>
+                      <ul className="mt-4 list-disc space-y-2 pl-6 text-base text-[#94a3b8]/90 leading-[1.75]">
+                        <li>
+                          Dados de login e identificação da conta (e-mail no
+                          Firebase Authentication);
+                        </li>
+                        <li>Nome, sobrenome e demais dados de perfil na nuvem;</li>
+                        <li>
+                          Idioma estudado, progresso por missão e histórico de
+                          respostas;
+                        </li>
+                        <li>Dias de estudo e tokens de aparelho vinculados à conta;</li>
+                        <li>
+                          Registros associados à conta nos bancos de dados
+                          utilizados pelo BiliUp, quando existirem.
+                        </li>
+                      </ul>
+                      <p className="mt-4 text-sm text-[#94a3b8]/75 leading-[1.65]">
+                        Pode haver prazo curto de retenção em backups ou registros
+                        técnicos exigidos por lei; nesses casos, os dados deixam
+                        de ser usados para finalidade ativa e são eliminados
+                        quando o backup expira.
+                      </p>
+                      <h3 className="mt-6 text-base font-semibold text-white">
+                        No aparelho (dados locais)
+                      </h3>
+                      <p className="mt-3 text-base text-[#94a3b8]/90 leading-[1.75]">
+                        Sessão autenticada e cópia offline do progresso ficam no
+                        dispositivo. Elas não são apagadas automaticamente só
+                        pela exclusão na nuvem. Para remover tudo localmente,
+                        use{" "}
+                        <strong className="font-medium text-white/90">
+                          Configurações do Android → Apps → BiliUp → Limpar dados
+                        </strong>{" "}
+                        ou desinstale o aplicativo. Se usar outro celular com o
+                        app antigo, repita a limpeza lá também.
+                      </p>
+                    </>
                   ) : (
                     <>
                       <p className="mt-4 text-base text-[#94a3b8]/90 leading-[1.75]">
@@ -772,7 +861,11 @@ export function ExclusaoContaContent({ slug }: { slug: ExclusaoAppSlug }) {
                     Sem acesso ao aplicativo
                   </h2>
                   <p className="mt-4 text-base text-[#94a3b8]/90 leading-[1.75]">
-                    {slug === "driveflow" || slug === "civiflow" || slug === "rotivy" || slug === "price-ml" ? (
+                    {slug === "driveflow" ||
+                    slug === "civiflow" ||
+                    slug === "rotivy" ||
+                    slug === "price-ml" ||
+                    slug === "biliup" ? (
                       <>
                         Se você não consegue abrir o {appName} (por exemplo
                         após trocar de aparelho ou perder o acesso), ainda pode
@@ -855,6 +948,14 @@ export function ExclusaoContaContent({ slug }: { slug: ExclusaoAppSlug }) {
                     obrigatórios estão marcados com asterisco. Para dados que
                     existem só no celular, lembre-se de limpar o app ou
                     desinstalar no aparelho, além deste pedido.
+                  </>
+                ) : slug === "biliup" ? (
+                  <>
+                    Preencha o formulário para solicitar a exclusão da conta
+                    (incluindo perfil, progresso de missões e dados em nuvem) ou
+                    de dados específicos. Campos obrigatórios estão marcados com
+                    asterisco. Para sessão e cópia offline no celular, limpe os
+                    dados do app ou desinstale no aparelho, além deste pedido.
                   </>
                 ) : (
                   <>
